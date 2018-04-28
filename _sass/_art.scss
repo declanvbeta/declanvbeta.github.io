@@ -1,0 +1,49 @@
+.wrapper {
+	// max-width: 100%;
+	// padding-left: 15px;
+	// padding-right: 15px;
+}
+
+.grid {
+	position: relative;
+	display: block;
+	margin: 0 auto;
+	width: 100%;
+
+	@media (min-width: 985px) {
+		max-width: 985px;
+	}
+	@include clearfix();
+
+
+	// .grid-sizer {
+	// 	position: relative;
+	// 	display: none;
+	// 	// width: 40%;
+	// }
+	.grid-item {
+		position: relative;
+		display: block;
+		width: 48%;
+		@media (max-width: 756px) {
+			width: 100%;
+		}
+
+		// width: 300px;
+
+		// margin: 5%;
+		// float: left;
+		// @include display-flex();
+
+		// width: calc(20%);
+		// height: auto;
+		// padding: 9px;
+		@include border-box();
+		.image {
+			position: relative;
+			display: block;
+			// max-width: 50%;
+			// max-height: 50%;
+		}
+	}
+}

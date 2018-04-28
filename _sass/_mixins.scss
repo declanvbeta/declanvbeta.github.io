@@ -1,0 +1,880 @@
+// =============================================================================
+// String Replace
+// =============================================================================
+
+@function str-replace($string, $search, $replace: "") {
+  $index: str-index($string, $search);
+
+  @if $index {
+    @return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+  }
+
+  @return $string;
+}
+
+// =============================================================================
+// Font Face
+// =============================================================================
+
+@mixin font-face($name, $path, $weight: null, $style: null, $exts: eot woff2 woff ttf svg) {
+  $src: null;
+
+  $extmods: (
+    eot: "?",
+    svg: "#" + str-replace($name, " ", "_")
+  );
+
+  $formats: (
+    otf: "opentype",
+    ttf: "truetype"
+  );
+
+  @each $ext in $exts {
+    $extmod: if(map-has-key($extmods, $ext), $ext + map-get($extmods, $ext), $ext);
+    $format: if(map-has-key($formats, $ext), map-get($formats, $ext), $ext);
+    $src: append($src, url(quote($path + "." + $extmod)) format(quote($format)), comma);
+  }
+
+  @font-face {
+    font-family: quote($name);
+    font-style: $style;
+    font-weight: $weight;
+    src: $src;
+  }
+}
+
+// Fonts
+@include font-face("NunitoSans-ExtraLight", "../fonts/NunitoSans-ExtraLight", 100, normal, ttf);
+@include font-face("NunitoSans", "../fonts/NunitoSans-Regular", 400, normal, ttf);
+@include font-face("NunitoSans-Italic", "../fonts/NunitoSans-Italic", 400, italic, ttf);
+@include font-face("NunitoSans-ExtraBold", "../fonts/NunitoSans-ExtraBold", 800, normal, ttf);
+@include font-face("EBGaramond-Medium", "../fonts/EBGaramond-Medium", 400, normal, ttf);
+@include font-face("EBGaramond-MediumItalic", "../fonts/EBGaramond-MediumItalic", 400, italic, ttf);
+@include font-face("EBGaramond-Bold", "../fonts/EBGaramond-Bold", 800, normal, ttf);
+@include font-face("EBGaramond-BoldItalic", "../fonts/EBGaramond-BoldItalic", 800, italic, ttf);
+@include font-face("MedulaOne", "../fonts/MedulaOne-Regular", 800, italic, ttf);
+
+@include font-face("Tofino-Regular", "../fonts/TofinoProPersonalWide-Regular", 400, normal, otf);
+@include font-face("Tofino-Semibold", "../fonts/TofinoProPersonalCond-Semibold", 800, bold, otf);
+@include font-face("Tofino-Light", "../fonts/TofinoProPersonalCond-Light", 100, bold, otf);
+@include font-face("Tofino-Medium", "../fonts/TofinoProPersonalCond-Medium", 300, bold, otf);
+@include font-face("Tofino-Narrow-Medium", "../fonts/TofinoProPersonalNarrow-Book", 300, bold, otf);
+
+@include font-face("Majesti-Heavy", "../fonts/Majesti-Banner-Heavy", 800, bold, otf);
+@include font-face("Majesti-Heavy-Italic", "../fonts/Majesti-Banner-HeavyItalic", 800, bold, otf);
+
+
+@mixin nav-font() {
+  font-family: Tofino-Narrow-Medium, sans-serif;
+  color: $site-blue;
+}
+
+@mixin header-font() {
+  font-family: Tonfino-Semibold, sans-serif;
+}
+
+@mixin body-font() {
+  font-family: Tofino-Regular, sans-serif;
+  font-size: 19px;
+}
+
+@mixin body-light() {
+  font-family: Tofino-Light, sans-serif;
+}
+
+@mixin clearfix() {
+  &:after {
+    content:".";
+    display:block;
+    height:0;
+    clear:both;
+    visibility:hidden;
+  }
+}
+
+@mixin border-box() {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+@mixin transform-origin($properties) {
+  -webkit-transform-origin: $properties;
+  -o-transform-origin: $properties;
+  -ms-transform-origin: $properties;
+  transform-origin: $properties;
+}
+
+@mixin transition($properties) {
+  -webkit-transition: $properties;
+  -o-transition: $properties;
+  transition: $properties;
+}
+
+@mixin transform($properties) {
+  -webkit-transform: $properties;
+  -o-transform: $properties;
+  transform: $properties;
+}
+
+
+
+// Flexbox prefix mixins
+
+// Parent container properties
+
+@mixin display-flex() {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+@mixin flex-direction-column() {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+@mixin flex-direction-row() {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+@mixin flex-direction-row-reverse() {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+  -ms-flex-direction: row-reverse;
+  flex-direction: row-reverse;
+}
+
+@mixin flex-wrap($property) {
+  -webkit-flex-wrap: $property;
+  -ms-flex-wrap: $property;
+  flex-wrap: $property;
+}
+
+@mixin justify-content-space-between() {
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+@mixin justify-content-center() {
+  -webkit-box-pack: center; 
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+@mixin justify-content-flex-end() {
+  -webkit-box-pack: end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+}
+
+@mixin justify-content-flex-start() {
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+}
+
+// Align items (like align content) requires different properties for ms...therefore there must be separate mixins for each property...with the exception of stretch
+@mixin align-items-flex-end() {
+  -webkit-box-align: end;
+  -webkit-align-items: flex-end;
+  -ms-flex-align: end;
+  align-items: flex-end;
+}
+
+@mixin align-items-flex-start() {
+  -webkit-box-align: start;
+  -webkit-align-items: flex-start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+}
+
+@mixin align-items($property) {
+  -webkit-box-align: $property;
+  -webkit-align-items: $property;
+  -ms-flex-align: $property;
+  align-items: $property;
+}
+
+// Align content (like align items) requires different properties for ms...therefore there must be separate mixins for each property...with the exception of stretch
+@mixin align-content-flex-end() {
+  -webkit-align-content: flex-end;
+  -ms-flex-line-pack: end;
+  align-content: flex-end;
+}
+
+@mixin align-content($property) {
+  -webkit-align-content: $property;
+  -ms-flex-line-pack: $property;
+  align-content: $property;
+}
+
+// Child properties
+
+@mixin flex($value) {
+  -webkit-box-flex: $value;
+  -webkit-flex: $value;
+  -ms-flex: $value;
+  flex: $value;
+}
+
+@mixin align-self-start() {
+  -webkit-align-self: flex-start;
+  -ms-flex-item-align: start;
+  align-self: flex-start;
+}
+
+@mixin align-self-end() {
+  -webkit-align-self: flex-end;
+  -ms-flex-item-align: end;
+  align-self: flex-end;
+}
+
+@mixin flex-grow($value) {
+  -webkit-box-flex: $value;
+  -webkit-flex-grow: $value;
+  -ms-flex-positive: $value;
+  flex-grow: $value;
+}
+
+@keyframes underline-gradient { 
+  0%{
+    transform: translate3d(0%, 0%, 0);
+  }
+  100%{
+    transform: translate3d(-75%, 0%, 0);
+  }
+}
+
+@mixin gradient-border-top() {
+    &:before {
+    // background: linear-gradient(
+    //   to bottom,
+    //   rgba( map_get($colors, 'black'), 0.8),
+    //   rgba( map_get($colors, 'black'), 0.8)
+    // ) center 1.08em / 100% 2px no-repeat;
+
+    content: "";
+    height: 3px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 400%;
+    will-change: transform;
+    z-index: 1;
+
+    animation: underline-gradient 6s linear infinite;
+    background-image: linear-gradient(
+      90deg, 
+      rgba( map_get($colors, 'purple'), 0.8) 15%, 
+      rgba( map_get($colors, 'green'), 0.6) 35%,  
+      rgba( map_get($colors, 'purple'), 0.8) 85%
+    );
+  }
+}
+
+@mixin gradient-border-bottom() {
+    &:after {
+    // background: linear-gradient(
+    //   to bottom,
+    //   rgba( map_get($colors, 'black'), 0.8),
+    //   rgba( map_get($colors, 'black'), 0.8)
+    // ) center 1.08em / 100% 2px no-repeat;
+
+    content: "";
+    height: 3px;
+    left: 0;
+    position: absolute;
+    bottom: 0;
+    width: 400%;
+    will-change: transform;
+    z-index: 1;
+
+    animation: underline-gradient 6s linear infinite;
+    background-image: linear-gradient(
+      90deg, 
+      rgba( map_get($colors, 'purple'), 0.8) 15%, 
+      rgba( map_get($colors, 'green'), 0.6) 35%,  
+      rgba( map_get($colors, 'purple'), 0.8) 85%
+    );
+  }
+}
+
+
+
+// .graddynamic {
+//   position: fixed;
+//   top: 0;
+//   bottom: 0;
+//   left: 0;
+//   right: 0;
+//   z-index: -1;
+// }
+
+// .graddynamic:after, .graddynamic:before {
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   width: 400%;
+//   height: 400%;
+//   content: "";
+//   z-index: -1;
+// }
+
+// .graddynamic:after {
+//   background: radial-gradient(circle, red, transparent);
+//   animation: colorSpin 30s linear infinite;
+// }
+
+// .graddynamic:before {
+//   background-color: yellow;
+// }
+
+// @keyframes colorSpin {
+//   25% {
+//     transform: translateY(-75%);
+//   }
+//   50% {
+//     transform: translate(-75%, -75%);
+//   }
+//   75% {
+//     transform: translate(-75%, 0);
+//   }
+//   100% {
+//     filter: hue-rotate(360deg);
+//   }
+//   /*75 is obtained as 100[1- (100/(height or width written in .gradDynamic:after)). i.e. 75 = 100[1-100/400] */
+// }
+
+// Animations:
+
+@mixin prefix-animation ($properties) {
+  -webkit-animation: $properties;
+  animation: $properties;
+}
+
+@mixin prefix-animation-delay ($properties) {
+  -webkit-animation-delay: $properties;
+  animation-delay: $properties;
+}
+
+@keyframes section-in-left {
+  0% {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@-webkit-keyframes section-in-left {
+  0% {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes text-in-left {
+  0% {
+    opacity: 0;
+    transform: translateX(-200px);
+  }
+  50% {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@-webkit-keyframes text-in-left {
+  0% {
+    opacity: 0;
+    transform: translateX(-200px);
+  }
+  50% {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@-webkit-keyframes text-reveal-from-below {
+  0% {
+    // opacity: 0;
+    transform: translateY(400px);
+  }
+  50% {
+    // opacity: 0;
+    // transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes textbox-in-left {
+  0% {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@-webkit-keyframes textbox-in-left {
+  0% {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes tech-in-left {
+  0% {
+    opacity: 0;
+    // transform: translateX(-100px);
+    transform: translateY(-2000px);
+  }
+  90% {
+    opacity: 0.25;
+    // transform: translateX(-100px);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes tech-in-top {
+  0% {
+    opacity: 0;
+    // transform: translateX(-100px);
+    transform: translateY(-200px);
+  }
+  90% {
+    // opacity: 0.5;
+    transform: translateY(-100px);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes bounceLetter {
+  
+  0% {
+    // opacity: 0;
+    transform: none;
+  }
+  // 25% {
+  //   transform: translateY(-10%);
+  //   // transform: translate(-10%, 0);
+  // }
+  // 50% {
+  //   transform: translateY(-20%);
+  //   // transform: translate(-10%, 0);
+  // }
+  75% {
+    transform: translateY(-10%);
+  }
+  100% {
+    // opacity: 1;
+    transform: none;
+  }
+  /*75 is obtained as 100[1- (100/(height or width written in .gradDynamic:after)). i.e. 75 = 100[1-100/400] */
+}
+
+@keyframes revealLetters {
+  
+  0% {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  // 25% {
+  //   transform: translateY(-10%);
+  //   // transform: translate(-10%, 0);
+  // }
+  // 50% {
+  //   // transform: translate(-10%, 0);
+  // }
+  70% {
+    opacity: 0;
+    // transform: translateY(-10%);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+  /*75 is obtained as 100[1- (100/(height or width written in .gradDynamic:after)). i.e. 75 = 100[1-100/400] */
+}
+
+@keyframes openRightArrow {
+  0% {
+    right: -60px;
+    opacity: 0.75;
+  }
+
+  100% {
+    right: 0px;
+    opacity: 1;
+  }
+}
+
+@keyframes openLeftArrow {
+  0% {
+    left: -60px;
+    opacity: 0.75;
+  }
+
+  100% {
+    left: 0px;
+    opacity: 1;
+  }
+}
+
+@keyframes showSecondArrowText {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes showFirstArrowText {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@mixin showFirstArrowText() {
+  @include prefix-animation(showFirstArrowText 0.5s cubic-bezier(0.5, 0, 0.5, 1) forwards);
+}
+
+@mixin showSecondArrowText() {
+  @include prefix-animation(showSecondArrowText 0.5s 0.5s cubic-bezier(0.5, 0, 0.5, 1) forwards);
+}
+
+@mixin openRightArrow() {
+  @include prefix-animation(openRightArrow 0.5s cubic-bezier(0.5, 0, 0.5, 1) forwards);
+}
+
+@mixin openLeftArrow() {
+  @include prefix-animation(openLeftArrow 0.5s cubic-bezier(0.5, 0, 0.5, 1) forwards);
+}
+
+@mixin expand-ruleline($color, $timing) {
+  &:before{
+    overflow: hidden; 
+    opacity: 0;
+    width: 100%;
+    // height:100%;
+    content:'';
+    position: absolute;
+    top: 40px;
+    left:0;
+    @include border-box();
+    // @include transition(0.5s);
+    @include prefix-animation(expand-ruleline $timing cubic-bezier(0.5, 0, 0.5, 1) forwards);
+  }
+
+  &:before {
+    border-bottom: 3px solid $color;
+    // border-left: 0;
+    // @include transform-origin(0% 100%);
+  }
+
+}
+
+
+@keyframes expand-ruleline {
+  0% {
+    transform: translateX(-1000px)
+    // @include transform(scale(0));
+
+  }
+
+  90% {
+    opacity: 0;
+  }
+
+  100% {
+    transform: none;
+    opacity: 1;
+    // width: 100%;
+      // @include transform(scale(1));
+  }
+}
+
+@keyframes pageTransition {
+  0% {
+    background-color: white;
+  }
+
+  50% {
+    background-color: black;
+  }
+
+  100% {
+    background-color: white;
+  }
+}
+
+@mixin pageTransition() {
+
+  @include prefix-animation(pageTransition 1s cubic-bezier(0.5, 0, 0.5, 1) forwards);
+
+}
+
+
+// @-webkit-keyframes tech-in-left {
+//   0% {
+//     opacity: 0;
+//     transform: translateX(-100px);
+//   }
+//   75% {
+//     opacity: 0;
+//   }
+//   100% {
+//     opacity: 1;
+//     transform: none;
+//   }
+// }
+
+
+
+// @keyframes reveal-on-scroll {
+//   0% {
+//     opacity: 0;
+//     transform: translateY(4em) rotateZ(-5deg);
+//   }
+//   100% {
+//     opacity: 1;
+//     transform: rotateZ(-2deg);
+//   }
+// }
+
+@mixin bounceLetter ($timing) {
+  @include prefix-animation(bounceLetter $timing cubic-bezier(0.5, 0, 0.5, 1) forwards);
+}
+
+@mixin revealLetters ($timing) {
+  @include prefix-animation(revealLetters $timing cubic-bezier(0.58, 0.33, 0.35, 0.99) forwards);
+}
+
+@mixin section-in-left () {
+  @include prefix-animation(section-in-left 1s cubic-bezier(0.37, 0.01, 0.49, 1.21) forwards);
+}
+
+@mixin textbox-in-left () {
+  @include prefix-animation(text-in-left 2s cubic-bezier(0.42, 0, 0.06, 1.03) forwards);
+}
+
+@mixin text-in-left($timing, $curve) {
+  @include prefix-animation(text-in-left $timing $curve forwards);
+}
+
+@mixin text-reveal-from-below($timing, $curve) {
+  @include prefix-animation(text-reveal-from-below $timing 0.6s $curve forwards);
+}
+
+@mixin tech-in-left($timing, $curve) {
+  @include prefix-animation(tech-in-left $timing $curve forwards);
+}
+
+@mixin tech-in-top($timing, $curve) {
+  @include prefix-animation(tech-in-left $timing $curve forwards);
+}
+
+@mixin reveal-on-scroll() {
+  @include prefix-animation(reveal-on-scroll 4s .25s cubic-bezier(0,1,.3,1) forwards);
+}
+
+
+
+// 
+
+// UI Elements
+
+// Buttons
+
+// .box {
+//   position:relative;
+//   vertical-align: middle;
+//   color: #0b7;
+//   display: inline-block;
+//   height: 60px;
+//   line-height: 60px;
+//   text-align: center;
+//   transition: 0.5s;
+//   padding: 0 20px;
+//   cursor: pointer;
+//   border: 2px solid #0b7;
+//   -webkit-transition:0.5s;
+// }
+
+// .box:hover {
+//   border: 2px solid rgba(0,160,80,0);
+//   color: #FFF;
+// }
+
+
+@mixin expand-underline($color-hover) {
+
+  position:relative;
+  cursor: pointer;
+  border: 2px solid transparent;
+
+  &:before,
+  &:after {
+    width: 100%;
+    height:100%;
+    content:'';
+    position: absolute;
+    top:0;
+    left:0;
+    @include border-box();
+  }
+
+  &:before {
+    border-bottom: 3px solid $color-hover;
+    border-left: 0;
+  }
+
+  &:after {
+    border-top: 0;
+    border-right: 0;
+  }
+
+  &.active {
+    color: $color-hover;
+  }
+
+  &:not(.active) {
+    &:hover {
+      color: $color-hover;
+    }
+
+    &:before,
+    &:after {
+      @include transform(scale(0));
+      @include transition(0.5s);
+    }
+
+    &:before {
+      @include transform-origin(0% 100%);
+    }
+
+    &:after {
+      @include transform-origin(50% 50%);
+    }
+
+    &:hover {
+      &:after,
+      &:before {
+        @include transform(scale(1));
+      }
+    }
+  }
+
+}
+
+@mixin nav-button($color, $color-hover) {
+  position: relative;
+  display: inline-block;
+  background-color: transparent;
+  font-family: $button-font;
+  font-size: 25px;
+  text-transform: uppercase;
+  @include border-box();
+  letter-spacing: 0.75px;
+  line-height: 25px;
+  padding: 4px 5px 8px 5px;
+  // margin: 5px;
+  // padding: 2px 5px 5px 5px;
+  // padding: 0;
+  margin: 2px 5px 5px 5px;
+  border-bottom: 5px solid transparent;
+  text-decoration: none;
+  color: $color;
+
+  @include expand-underline($color-hover);
+
+
+  &.active {
+    &:before {
+      border-bottom: 3px solid $color-hover;
+      border-left: 0;
+      @include transform-origin(0% 100%);
+    }
+    color: $color-hover;
+  }
+  @include border-box();
+}
+
+@mixin button($color, $color-hover) {
+  position: relative;
+  display: inline-block;
+  background-color: transparent;
+  font-family: $button-font;
+  font-size: 25px;
+  text-transform: uppercase;
+  @include border-box();
+  // padding: 2px 5px 5px 5px;
+  padding: 0;
+  margin: 2px 5px 5px 5px;
+  border-bottom: 5px solid transparent;
+  text-decoration: none;
+  color: $color;
+
+  @include expand-underline($color-hover);
+
+
+  &.active {
+    &:before {
+      border-bottom: 3px solid $color-hover;
+      border-left: 0;
+      @include transform-origin(0% 100%);
+    }
+    color: $color-hover;
+  }
+  @include border-box();
+}
+
+@mixin gradient-shadow() {
+  box-shadow: 27px 23px 107px -6px rgba(0,0,0,0.32);
+}
+

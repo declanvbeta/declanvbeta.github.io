@@ -1,0 +1,23 @@
+---
+layout: default
+---
+ 
+<h2 class="content">{{page.title}}</h2>
+ 
+<figure class="img-container">
+	<a href="/assets/{{ art.large-image }}" >
+		<img class="image" src="/assets/{{ art.small-image }}" alt="{{art.alt}}">
+	</a>
+	<!-- ![My helpful screenshot]({{ "/assets/screenshot.jpg" | absolute_url }}) -->
+	<figcaption class="title">{{art.title}}</figcaption>
+	<span class="description">
+		{{art.description}}
+	</span>
+	<span class="medium">
+		{{art.medium}}
+	</span>
+</figure>
+
+<p>{{page.description}}</p>
+ 
+<!-- {{ content }} -->

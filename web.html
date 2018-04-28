@@ -1,0 +1,52 @@
+---
+layout: default
+title: Web
+weight: 1
+custom_js:
+- jquery-3.2.1.min
+- scroll-into-view
+---
+
+<!-- <div class="section-title">
+	<h4>
+		Web
+	</h4>
+</div>	 -->	
+
+<div class="projects-container">
+
+	{% for web in site.webs %}
+
+		{% assign img_path = "/assets/images/web/" | append: web.image-cover %}
+
+		<a href="{{ web.url }}.html" data-seen-yet="false" class="web-project {{ web.title | replace: ' ','-' | downcase }} {% if forloop.first == true %}first{% else %}show-on-scroll{% endif %}">
+			<div class="img-container">
+				<img class="image" src="{{ img_path | absolute_url}}" alt="{{web.alt}}">
+				<!-- ![My helpful screenshot]({{ "/assets/screenshot.jpg" | absolute_url }}) -->
+			</div>
+			<div class="description-container">
+				<div class="title-container">
+					<h3 class="title">
+						{{web.title}}
+					</h3>
+				</div>
+
+				<p class="description">
+					{{web.description}}
+				</p>
+				<div class="tech-wrapper">
+					<h6 class="tech-title">Technologies Used:</h6>
+					<p class="tech-list">
+
+						{% for technology in web.technologies %}
+							<span class="tech-item tech-{{ forloop.index }}">{{technology}}{% if forloop.last != true %}, {% endif %}</span>
+						{% endfor %}
+					</p>
+				</div>
+			</div>
+
+		</a>	
+
+	{% endfor %}  
+
+</div>

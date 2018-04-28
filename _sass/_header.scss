@@ -1,0 +1,149 @@
+@keyframes scroll-away {
+  0% {
+    // opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-4em) scaleY(0.5);
+  }
+}
+
+@keyframes scroll-in {
+	0% {
+		opacity: 0;
+		transform: translateY(-4em) scaleY(0.5);
+	}
+	100% {
+		opacity: 1;
+		transform: none;
+	}
+}
+
+@mixin scroll-in() {
+  @include prefix-animation(scroll-in 1.25s .25s cubic-bezier(0,1,.3,1) forwards);
+
+}
+
+@mixin scroll-away() {
+  @include prefix-animation(scroll-away 1.25s cubic-bezier(0,1,.3,1) forwards);
+}
+
+
+.site-header {
+	position: fixed;
+	display: block;
+	// background-color: white;
+	border-top: 0;
+	background-color: transparent;
+
+    color: transparent;
+    // display: inline-block;
+    overflow: hidden;
+    text-decoration: none;
+
+    vertical-align: bottom;
+    z-index: 100;
+    text-shadow: none;
+    border-bottom: none;
+    width: 100%;
+    top: 0;
+    @include border-box();
+    padding: 10px 0;
+    // If I decide I want a shadow under the header, here is the best option:
+    // box-shadow: 5px 10px 40px 10px rgba(0, 0, 0, 0.1);
+    // @include gradient-shadow();
+
+  	// background-image: linear-gradient(white, transparent);
+  	background-color: transparent;
+    // background-image: linear-gradient(blue, transparent);
+
+
+  	// background-color: transparent;
+
+    &.initial {
+	    opacity: 0;
+	    @include scroll-in();
+    }
+
+    // transform: translateY(-4em) scale(0.75em);
+
+    // transition: all 1.25s cubic-bezier(0,1,.3,1);
+
+    &.scroll-in {
+    	opacity: 0;
+    	@include scroll-in();
+    }
+
+    &.scroll-away {
+
+    	@include scroll-away();
+
+    }
+
+
+	.site-title {
+
+		@include nav-font();
+		// font-family: Tofino-Medium, sans-serif;
+		text-transform: uppercase;
+		// font-size: 40px;
+		// letter-spacing: 0.75px;
+		font-weight: 100;
+		// color: mix(map_get($colors, 'purple'), map_get($colors, 'green'));
+		text-shadow: none;
+		text-decoration: none;
+		position: relative;
+		display: inline-block;
+
+	}
+
+	.trigger {
+		.page-link {
+			position: relative;
+			display: inline-block;
+		    z-index: 2;
+		}
+	}
+
+	.site-title,
+	.trigger .page-link {
+		@include nav-button($site-blue, white);
+
+	}
+
+	.site-nav {
+		line-height: 25px;
+	}
+
+}
+
+// Page-specific header styles:
+
+.home {
+	.site-header {
+
+  		// background-image: linear-gradient($site-orange, transparent);
+
+		.site-title,
+		.trigger .page-link {
+			@include nav-button($site-blue, white);
+		}
+	}
+}
+
+.web,
+.art,
+.photo,
+.about {
+	.site-header {
+
+  		// background-image: linear-gradient(white, transparent);
+
+		.site-title,
+		.trigger .page-link {
+			@include nav-button($site-blue, $site-orange);
+		}
+
+	}
+
+}

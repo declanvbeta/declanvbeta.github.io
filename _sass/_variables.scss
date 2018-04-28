@@ -1,0 +1,31 @@
+$first: #382c3d;
+$second: #b0c5e2;
+$third: #ee323d;
+$fourth: #fee8c6;
+
+$site-yellow: #FBB53C;
+$site-orange: #FDB170;
+$site-pink: #FA2466;
+$site-purple: #350941;
+$site-blue: #3EAFC4;
+$site-light-blue: #9DF4FE;
+
+// $first: purple;
+// $second: green;
+
+// Colors
+$colors: (
+  'green': rgb(1, 255, 137),
+  'purple': rgb(122, 95, 255),
+  'black': rgb(20, 20, 20)
+);
+
+$colors-semi-transparent: (
+  'green': rgba(1, 255, 137, 0.75),
+  'purple': rgba(122, 95, 255, 0.75),
+  'black': rgba(20, 20, 20, 0.75)
+);
+
+$default-margin: 15px;
+
+$button-font: Tofino-Narrow-Medium, sans-serif;

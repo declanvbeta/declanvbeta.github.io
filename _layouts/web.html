@@ -1,0 +1,124 @@
+---
+layout: default
+---
+ 
+{% assign img_path = "/assets/images/web/" %}
+
+<div class="web-project-container {{ page.title | replace: ' ','-' | downcase }}">
+	<div class="background-color one"></div>
+	<div class="background-color two"></div>
+	{% if page.previous.url %}
+		<div class='page-nav prev'>
+			<div class="arrow-link-container">
+				<div class="arrow">
+				</div>
+			    <a class="link" href="{{page.previous.url}}.html">
+			    	<span class='one'>Previous</span> 
+			    	<span class='two'>Project</span>
+			    	<!-- {{page.previous.title}} -->
+			    </a>
+			</div>
+		</div>
+	{% endif %}
+	{% if page.next.url %}
+		<div class="page-nav next">
+			<div class="arrow-link-container">
+
+		    	<a class="link" href="{{page.next.url}}.html">
+		    		<span class='one'>Next</span> 
+		    		<span class='two'>Project</span>
+		    		<!-- {{page.next.title}} -->
+		    	</a>
+				<div class="arrow">
+				</div>
+			</div>
+		</div>
+	{% endif %}
+	<div class="content-container intro">
+
+		<div class="title-container">
+			<h2 class="title">
+				{{page.title}}
+			</h2>
+		</div>
+
+		<div class="intro-image">
+			<img src="{{img_path | append: page.image1}}" />
+		</div>
+
+		<div class="intro-text-container">
+			<div class="description-container">
+				<div class="intro-text-description">
+					<div class="intro-text">
+						{{page.description1}}
+					</div>
+				</div>
+				<div class="tech-wrapper">
+					<h6 class="tech-title">Technologies:</h6>
+					<div class="tech-list">
+
+						{% for technology in page.technologies %}
+							<p class="tech-item tech-{{ forloop.index }}">
+								<span>
+									{{technology}}{% if forloop.last != true %}, {% endif %}
+								</span>
+							</p>
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+			<div class="link-container">
+				<div class="link-wrapper">
+					<a class="link" href="{{ page.externalUrl }}">
+						View Live Site
+					</a>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	{% comment %}
+		<div class="isolated-wrapper">
+			<div class="isolated-container">
+				<p class="isolated-statement">
+					{{page.description2}}
+				</p>
+			</div>
+		</div>
+	{% endcomment %}
+
+	<div class="objective-container show-on-scroll">
+
+		<div class="title-container">
+			<div class="title">
+				Objective
+			</div>
+		</div>
+
+		<div class="objective-wrapper">
+			<p class="objective">
+				{{ page.objective }}
+			</p>
+		</div>
+
+	</div>
+
+	<div class="content-container outro show-on-scroll">
+		<div class="intro-image">
+			<img src="{{img_path | append: page.image2}}" />
+		</div>
+		<div class="full-width-text-container">
+			<p class="text">
+				{{ page.description3 }}
+			</p>
+		</div>
+		<div class="isolated-text">
+			<p class='text'>
+				{{ page.description2 }}
+			</p>
+		</div>
+
+	</div>
+</div>
+
