@@ -1,0 +1,16 @@
+  {% assign type = include.type %}
+  {% assign section = include.section | append: "/" %}
+<!--   <div class="section-title">
+    <h4>
+      {{type | replace: "-", " "}}
+    </h4>
+  </div>   -->
+  {% for art in site.pages %}
+
+    {% if art.type contains include.type | split: ", " %}
+
+        {% include lazy-image.html type=type section=section art=art %}
+
+    {% endif %}
+
+  {% endfor %}  

@@ -2,17 +2,25 @@
 	// max-width: 100%;
 	// padding-left: 15px;
 	// padding-right: 15px;
+
 }
 
 .grid {
 	position: relative;
 	display: block;
+	//visibility: hidden;
+	opacity: 0;
 	margin: 0 auto;
 	width: 100%;
 
-	@media (min-width: 985px) {
-		max-width: 985px;
+	//&.hide {
+	//	display: none;
+	//}
+
+	&.fade-in-grid {
+		@include fadeInGrid(0.5s, 0.7s);
 	}
+
 	@include clearfix();
 
 
@@ -24,7 +32,10 @@
 	.grid-item {
 		position: relative;
 		display: block;
-		width: 48%;
+		width: 50%;
+		margin: 0;
+		@include border-box();
+
 		@media (max-width: 756px) {
 			width: 100%;
 		}
@@ -39,11 +50,136 @@
 		// height: auto;
 		// padding: 9px;
 		@include border-box();
+
+		overflow: hidden;
+
+
 		.image {
 			position: relative;
 			display: block;
+			transform: none;
+			width: 100%;
+			height: auto;
+			//visibility: hidden;
 			// max-width: 50%;
 			// max-height: 50%;
+
+			//&.blur {
+			//	position: relative;
+			//	display: block;
+			//	width: 100%;
+			//	height: auto;
+			//	filter: blur(18px);
+			//	transform: scale(1.1);
+			//}
+
 		}
+
+		a {
+			position: relative;
+			display: block;
+			@include border-box();
+			padding: 10px;
+
+			&.unblur {
+				//padding-bottom: 10px !important;
+				.image {
+					@include unBlur(0s, 0s);
+
+                  //height: initial !important;
+				}
+
+			}
+		}
+
+		.title,
+		.description,
+		.medium {
+			display: none;
+		}
+
+		&.project {
+			overflow: hidden;
+			figcaption {
+				position: absolute;
+				display: block;
+				@include body-font();
+				bottom: 0;
+				width: 100%;
+				background-color: transparent;
+				color: #fff;
+				text-align: center;
+				transform: translateY(200%);
+				@include border-box();
+				padding: 10px;
+			}
+			&:hover {
+				figcaption {
+					@include raiseProjectLink(0.1s, 0.2s);
+				}
+
+				.project-link {
+					height: 100%;
+					width: 100%;
+					background-color: white;
+
+					a {
+						position: relative;
+						display: block;
+						height: 100%;
+						width: 100%;
+						margin: 0;
+
+						&:hover {
+							text-decoration: none;
+						}
+
+						span {
+							text-transform: none;
+							position: relative;
+							display: inline-block;
+							background-color: transparent;
+							font-family: $button-font;
+							font-size: 25px;
+							@include border-box();
+							letter-spacing: 0.75px;
+							line-height: 25px;
+							padding: 4px 5px 8px 5px;
+							margin: 2px 5px 5px 5px;
+							border: 2px solid transparent;
+							text-decoration: none;
+							color: $site-purple;
+							@include border-box();
+							@include text-in-left(1s, cubic-bezier(0, 0.58, 0, 1));
+						}
+
+					}
+
+					&:hover {
+						cursor: pointer;
+						background-color: $site-pink;
+						span {
+							cursor: pointer;
+							text-decoration: none;
+							color: white;
+							@include expand-underline(white, 3px);
+
+							&.active {
+								&:before {
+									border-bottom: 3px solid white;
+									border-left: 0;
+									@include transform-origin(0% 100%);
+								}
+								color: white;
+							}
+						}
+
+					}
+
+				}
+
+			}
+		}
+
 	}
 }

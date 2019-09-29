@@ -1,38 +1,41 @@
 ---
 layout: default
+hex: 3EAFC4
 ---
  
 {% assign img_path = "/assets/images/web/" %}
+{% assign nextPage = page.next %}
+{% assign prevPage = page.previous %}
 
 <div class="web-project-container {{ page.title | replace: ' ','-' | downcase }}">
 	<div class="background-color one"></div>
 	<div class="background-color two"></div>
-	{% if page.previous.url %}
-		<div class='page-nav prev'>
-			<div class="arrow-link-container">
-				<div class="arrow">
-				</div>
-			    <a class="link" href="{{page.previous.url}}.html">
-			    	<span class='one'>Previous</span> 
-			    	<span class='two'>Project</span>
-			    	<!-- {{page.previous.title}} -->
-			    </a>
+	{% if page.previous %}
+	<a class='page-nav prev' href="{{prevPage.url}}.html" data-hex="{{prevPage.hex}}">
+		<div class="arrow-link-container">
+			<div class="arrow">
+			</div>
+			<div class="text-container" >
+				<span class='one'>Previous</span>
+				<span class='two'>Project</span>
+				<!-- {{page.previous.title}} -->
 			</div>
 		</div>
+	</a>
 	{% endif %}
-	{% if page.next.url %}
-		<div class="page-nav next">
-			<div class="arrow-link-container">
+	{% if nextPage %}
+	<a class="page-nav next" href="{{nextPage.url}}.html" data-hex="{{nextPage.hex}}">
+		<div class="arrow-link-container">
 
-		    	<a class="link" href="{{page.next.url}}.html">
-		    		<span class='one'>Next</span> 
-		    		<span class='two'>Project</span>
-		    		<!-- {{page.next.title}} -->
-		    	</a>
-				<div class="arrow">
-				</div>
+			<div class="text-container" >
+				<span class='one'>Next</span>
+				<span class='two'>Project</span>
+				<!-- {{page.next.title}} -->
+			</div>
+			<div class="arrow">
 			</div>
 		</div>
+	</a>
 	{% endif %}
 	<div class="content-container intro">
 
@@ -60,20 +63,26 @@ layout: default
 						{% for technology in page.technologies %}
 							<p class="tech-item tech-{{ forloop.index }}">
 								<span>
-									{{technology}}{% if forloop.last != true %}, {% endif %}
+									{{technology}}
+
+									{% comment %}
+										{{technology}}{% if forloop.last != true %}, {% endif %}
+									{% endcomment %}
 								</span>
 							</p>
 						{% endfor %}
 					</div>
 				</div>
 			</div>
+			{% if page.externalUrl %}
 			<div class="link-container">
 				<div class="link-wrapper">
-					<a class="link" href="{{ page.externalUrl }}">
+					<a class="link" href="{{ page.externalUrl }}" target="_blank">
 						View Live Site
 					</a>
 				</div>
 			</div>
+			{% endif %}
 		</div>
 
 	</div>
@@ -105,20 +114,112 @@ layout: default
 	</div>
 
 	<div class="content-container outro show-on-scroll">
-		<div class="intro-image">
-			<img src="{{img_path | append: page.image2}}" />
-		</div>
-		<div class="full-width-text-container">
-			<p class="text">
-				{{ page.description3 }}
-			</p>
-		</div>
-		<div class="isolated-text">
-			<p class='text'>
-				{{ page.description2 }}
-			</p>
+		{% if page.video1 %}
+			<div class="video-container">
+				{{ page.video1 }}
+			</div>
+		{% elsif page.image2 %}
+			<div class="intro-image">
+				<img src="{{img_path | append: page.image2}}" />
+			</div>
+		{% endif %}
+		{% if page.image3 == nil %}
+			<div class="isolated-text">
+				<p class='text'>
+					{{ page.description2 }}
+				</p>
+			</div>
+		{% else %}
+			<div class="full-width-text-container">
+				<p class="text">
+					{{ page.description2 }}
+				</p>
+			</div>
+		{% endif %}
+	</div>
+
+	{% if page.image3 and page.video2 == nil %}
+		<div class="content-container outro show-on-scroll">
+			<div class="intro-image">
+				<img src="{{img_path | append: page.image3}}" />
+			</div>
+			<div class="isolated-text">
+				<p class='text'>
+					{{ page.description3 }}
+				</p>
+			</div>
 		</div>
 
+	{% elsif page.video2 %}
+		<div class="content-container outro show-on-scroll">
+			<div class="video-container">
+				{{ page.video2 }}
+			</div>
+			<div class="isolated-text">
+				<p class='text'>
+					{{ page.description3 }}
+				</p>
+			</div>
+		</div>
+	{% elsif page.description3 %}
+		<div class="content-container outro show-on-scroll">
+			<div class="isolated-text show-on-scroll">
+				<p class='text'>
+					{{ page.description3 }}
+				</p>
+			</div>
+		</div>
+	{% endif %}
+
+	{% if page.image4 and page.description4 %}
+		<div class="content-container outro show-on-scroll">
+			<div class="intro-image">
+				<img src="{{img_path | append: page.image4}}" />
+			</div>
+			{% if page.description4 %}
+				<div class="full-width-text-container">
+					<p class="text">
+						{{ page.description4 }}
+					</p>
+				</div>
+			{% endif %}
+		</div>
+	{% elsif page.video3 and page.description4 %}
+        <div class="content-container outro show-on-scroll">
+            <div class="video-container">
+                {{ page.video3 }}
+            </div>
+            <div class="full-width-text-container">
+                <p class="text">
+                    {{ page.description4 }}
+                </p>
+            </div>
+        </div>
+	{% elsif page.description4 %}
+		<div class="content-container outro show-on-scroll">
+			<div class="full-width-text-container">
+				<p class="text">
+					{{ page.description4 }}
+				</p>
+			</div>
+		</div>
+	{% endif %}
+
+	{% if page.image5 %}
+	<div class="content-container outro show-on-scroll">
+		<div class="intro-image">
+			<img src="{{img_path | append: page.image5}}" />
+		</div>
+		{% if page.description5 %}
+		<div class="isolated-text">
+			<p class='text'>
+				{{ page.description5 }}
+			</p>
+		</div>
+		{% endif %}
 	</div>
+
+	{% endif %}
+
 </div>
 

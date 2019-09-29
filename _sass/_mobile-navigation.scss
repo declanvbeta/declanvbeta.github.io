@@ -1,0 +1,374 @@
+@media (max-width: 600px) {
+
+	.site-header {
+
+		overflow: visible;
+
+		.site-nav {
+
+			border: none;
+			float: none;
+			position: relative;
+			right: initial;
+			top: initial;
+			width: 100%;
+			height: 100%;
+			background-color: transparent;
+
+			.site-title-wrapper {
+
+				max-height: 50px;
+				@include display-flex();
+				@include flex-direction-row();
+				@include justify-content-space-between();
+				width: 100%;
+
+				.site-title {
+					@include flex(0 1 auto);
+					@include align-self-start();
+					justify-self: start;
+					z-index: 200;
+				}
+
+				.menu-wrapper {
+					@include flex(0 0 auto);
+					@include align-self-end();
+					justify-self: end;
+					position: relative;
+					@include display-flex();
+					@include flex-direction-column();
+					height: 100%;
+					#menu {
+
+						position: relative;
+						height: 100%;
+						// padding: 5px 12px;
+						padding: 6px 14px 12px 5px;
+						border-radius: 50% 50% 50% 50%;
+						box-shadow: 0 0 0 0 transparent, 0 0 0 0 transparent;
+						background-color: transparent;
+
+						&.touched {
+							@include closeMobileNav();
+						}
+
+						&:hover,
+						&:active {
+							cursor: pointer;
+						}
+
+						.hamburger {
+							position: relative;
+							width: 30px;
+							height: 2px;
+							margin: 50% 0;
+							// margin: 20% 0 80% 0;
+							background: $site-blue;
+							display: block;
+							transform-origin: center;
+							transition: .5s ease-in-out;
+							&:after,
+							&:before {
+								transition: .5s ease-in-out;
+								content: "";
+								position: absolute;
+								display: block;
+								width: 100%;
+								height: 100%;
+								background: $site-blue;
+							}
+							&:before {
+								top: -10px;
+							} 
+							&:after {
+								bottom: -10px;
+							}
+
+							&:hover {
+								cursor:pointer;
+							}
+						}
+					}
+				}
+
+
+
+			}
+
+			.trigger.box {
+				display: none;
+			}
+
+		}
+
+		&.open-mobile {
+			height: 100%;
+			padding-top: 0;
+
+			.wrapper {
+
+				height: 100%;
+				padding: 0;
+
+				.site-nav {
+					@include flex-direction-column();
+
+					li {
+
+						&:hover {
+							.subpages {
+								display: none;
+								// visibility: none;
+								// opacity: 0;
+							}
+						}
+
+					}
+
+					.site-title-wrapper {
+						padding: 10px 15px 0 15px;
+						#menu {
+							background-color: black;
+							display: inline-block;
+
+							@include openMobileNav();
+							padding: 12px 46px 0 0;
+
+							.hamburger {
+								background-color: white;
+								&:before,
+								&:after {
+									background-color: white;
+								}
+								transform: rotate(45deg);
+								&:after {
+									transform: rotate(90deg);
+									bottom: 0;
+								}
+								&:before {
+									transform: rotate(90deg);
+									top: 0;
+								}
+							}	
+						}
+
+					}
+
+					.trigger.box {
+						@include flex(2 1 auto);
+						@include display-flex();
+						@include flex-direction-column();
+
+
+						&.subnav-open {
+
+							.page-link {
+								// padding-bottom: 2.5%;
+								//margin: 10% 0;
+							}
+						}
+
+						.page-link {
+							display: block;
+							margin: 5% 0 6% 0;
+							//padding-bottom: 5%;
+							text-align: center;
+							opacity: 0;
+							color: white;
+						}
+
+
+
+							//opacity: 1;
+							//padding: 0;
+							//margin: 0;
+							//
+							//&:hover {
+							//
+							//	.subpages {
+							//		border: none;
+							//		visibility: hidden;
+							//		opacity: 0;
+							//		display: none;
+							//	}
+							//}
+
+
+						.subpages {
+							visibility: hidden;
+							display: none;
+							opacity: 0;
+							// border: none;
+
+							// border: 3px solid white;
+
+							// This will need to open the subnav and fade in each of the links
+							// it should also scale down the other links, and scale up the subnav links
+							// Clicking elsewhere should then reverse the whole process.
+							// Also, if you're on a page with a subnav, it should automatically be opened
+
+							&.open {
+								position: relative;
+								display: block;
+								background-color: black;
+								opacity: 1;
+								visibility: visible;
+								transform: scale(1.2);
+								margin: 10px 0;
+								padding: 5% 0;
+								top: initial;
+								height: initial;
+								transition: 0.5s;
+
+								border: 1.5px solid $sva-today-blue;
+
+
+								li {
+									display: block;
+
+									.page-link {
+
+										color: white;
+										//margin: 0;
+										//padding: 4px 0 2% 0;
+										opacity: 0;
+										$navLinks: 3;
+
+										@for $i from 1 through $navLinks {
+											$time: #{$i*.2}s;
+											&.link-#{$i} {
+
+												@include fadeInMobileLinks($time);
+
+											}
+
+										}
+									}
+
+								}
+
+							}
+
+
+							//&.closing-subnav {
+							//	//display: block;
+							//	@include closeSubnav();
+							//}
+
+						}
+
+
+
+
+
+						.page-link {
+
+							//padding: 4px 0 5% 0;
+
+							&.active {
+								margin-bottom: 0;
+							}
+
+							// the delay was originally 0.2s for all of them
+							// @include fadeInMobileLinks(0.2s);
+
+							$navLinks: 4;
+
+							@for $i from 1 through $navLinks {
+								$time: #{$i*.25}s;
+								&.link-#{$i} { 
+
+									@include fadeInMobileLinks($time);
+
+								}
+
+							}
+						}
+
+						&.subnav-open {
+							// .page-link:not(.selected) {
+							.page-link {
+								font-size: 16px;
+								line-height: 20px;
+								//transform: scale(0.8);
+								transition: 0.5s;
+								margin: 4% 0;
+								//padding: 4px 0 4% 0;
+								opacity: 0.8;
+
+								&.selected {
+									@include expand-underline($site-pink, 3px);
+								}
+							}
+
+							.subpages {
+								//border-top: blue;
+
+							}
+						}
+
+					}
+				}
+
+			}
+
+		}
+
+		.close-mobile {
+			.site-header .site-nav .site-title-wrapper .menu-wrapper #menu {
+				@include closeMobileNav();
+			}
+		}
+
+	}
+
+	@mixin mobileSubnavColor($color1, $color2) {
+		.site-header.open-mobile {
+			.wrapper {
+				.site-nav {
+					.trigger.box {
+						.subpages.open {
+							border: 1.5px solid $color1;
+						}
+
+						&.subnav-open {
+							.page-link.selected {
+								@include expand-underline($color2, 3px);
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	.about {
+		@include mobileSubnavColor($about-dark-blue, $about-pink);
+	}
+	.web {
+
+		@include mobileSubnavColor($site-blue, $site-orange);
+
+		&.relay {
+			@include mobileSubnavColor($relay-blue, $relay-red);
+		}
+
+		&.sightseer {
+			@include mobileSubnavColor($sightseer-blue, $sightseer-red);
+		}
+
+		&.ritandeclan {
+			@include mobileSubnavColor($ritandeclan-blue, $ritandeclan-pink);
+		}
+
+		&.sva-today-builder {
+			@include mobileSubnavColor($sva-today-blue, $sva-today-red);
+		}
+	}
+	.art {
+		@include mobileSubnavColor($site-blue, $site-pink);
+	}
+	.photo {
+		@include mobileSubnavColor($site-purple, $site-yellow);
+	}
+}

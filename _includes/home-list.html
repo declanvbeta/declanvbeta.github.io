@@ -1,0 +1,28 @@
+{% for art in site.pages %}
+
+{% if art.home %}
+
+    {% assign type = art.type %}
+    {% assign section = art.section | append: "/" %}
+    {% assign small_img_path = "/assets/images/" | append: section | append: type | append: "/small/" | append: art.small-image %}
+    {% assign large_img_path = "/assets/images/" | append: section | append: type | append: "/large/" | append: art.large-image %}
+
+    <!-- <div class="art-project grid-item"> -->
+    <figure class="img-container art-project grid-item">
+        <!-- <a href="/assets/{{ art.large-image }}" data-size="{{ art.size }}"> -->
+        <a href="{{ large_img_path | absolute_url}}" data-size="{{ art.size }}" class="no-barba">
+            <img class="image" src="{{ small_img_path | absolute_url}}" alt="{{art.alt}}">
+        </a>
+        <!-- ![My helpful screenshot]({{ "/assets/screenshot.jpg" | absolute_url }}) -->
+        <!-- <figcaption class="title">{{art.title}}</figcaption> -->
+        <!--        <span class="description">
+                  {{art.description}}
+                </span>
+                <span class="medium">
+                  {{art.medium}}
+                </span> -->
+    </figure>
+    <!-- </div>  -->
+    {% endif %}
+
+{% endfor %}

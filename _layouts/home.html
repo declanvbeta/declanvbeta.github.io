@@ -1,36 +1,57 @@
 ---
 layout: default
+title: Home
 pageId: home
+weight: 2
+hex: FFFFFF
+<!-- subpages: Illustration, Figure Drawings, Other Art -->
 ---
 
+{% assign art-cover = site.pages | where: "title", "Ayesha" | first %}
+{% assign photo-cover = site.pages | where: "title", "Haunted Mansion" | first %}
 
-<div class="web-intro-container">
-	<h3 class="web-intro">
-		Web design & development
-	</h3>
+{% assign web_title_array = 'Web' | split: "" %}
+{% assign art_title_array = art-cover.section | split: "" %}
+{% assign photo_title_array = photo-cover.section | split: "" %}
 
-	<h3 class="web-intro-line-2">
-		by day
-	</h3>
-</div>
 
-<div class="art-intro-container">
-	<h3 class="art-intro">
-		Art
-	</h3>
+<a href="/web" class="section-link" id="web" data-hex="9DF4FE">
+    <div class="image-container web-pattern-container">
+        {% include web-intro.svg %}
+<!--        <img src="/assets/images/home/web-cover.svg">-->
+    </div>
+    <div class="section-title">
+        <span class="title-wrapper">
+            <h1 class="section-header section-1">
+                {% include letter-loop.html letters=web_title_array %}
+            </h1>
+        </span>
+    </div>
+</a>
+<a href="{{'/' | append: art-cover.section}}" class="section-link" id="art" data-hex="FA2466">
+    {% include homepage-lazy-image.html art=art-cover section=art-cover.section type='figure-drawing' %}
+    <div class="section-title">
+        <span class="title-wrapper">
+            <h1 class="section-header section-2">
+                {% include letter-loop.html letters=art_title_array %}
+            </h1>
+        </span>
+    </div>
+</a>
+<a href="{{'/' | append: photo-cover.section}}" class="section-link" id="photo" data-hex="350941">
+    {% include homepage-lazy-image.html art=photo-cover section=photo-cover.section type='holga' %}
+    <div class="section-title">
+        <span class="title-wrapper">
+            <h1 class="section-header section-3">
+                {% include letter-loop.html letters=photo_title_array %}
+            </h1>
+        </span>
+    </div>
+</a>
 
-	<h3 class="art-intro-line-2">
-		by night
-	</h3>
-</div>
-
- 
-<!--  {% assign intro = "Web Designer & Developer by Day" | split: "" %}
-
- <h3 class="introduction">
-
- 	{% for letter in intro %}
- 		<span class="intro-letter-{{ forloop.index }}">{{ letter }}</span>
- 	{% endfor %}
- 	
- </h3> -->
+{% comment %}
+    <div class="projects-container grid">
+        {% include home-list.html %}
+    </div>
+    {% include photoswipe.html %}
+{% endcomment %}

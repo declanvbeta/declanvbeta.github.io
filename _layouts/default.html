@@ -12,29 +12,30 @@
   {% endif %}
 
   <body id="barba-wrapper" class="{{pageName}}" >
+    {% include shape-overlays.html %}
     <div class="barba-container" data-namespace="{{pageName}}">
 
       {% if page.layout == "home" %}
-        <div class="web-background-wrapper">
-           <div class="background-container">
-            {% include  web-intro.svg %}
-           </div>
-        </div>
-        <div class="art-background-wrapper">
-        </div>
 
       {% endif %}
 
       <!-- <div class="graddynamic"> -->
         <div class="content-container">
 
-          {% include header.html %}
-      
+          {% include new-header.html %}
+
+          {% unless page.title == 'About' %}
           <main class="page-content" aria-label="Content">
             <div class="wrapper content">
               {{ content }}
             </div>
           </main>
+
+          {% else %}
+
+          {{content}}
+
+          {% endunless %}
       
         {%comment%}  {% include footer.html %} {%endcomment%}
 

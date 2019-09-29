@@ -1,0 +1,42 @@
+{% assign entries = site.html_pages | sort: "weight" %}
+
+{% for entry in entries %}
+
+    {% capture slug %}{{ entry.url | split: "/"   | last }}{% endcapture %}
+    {% capture current %}{{ entry.url | remove: slug | remove: "//" | append: "/" }}{% endcapture %}
+    {% assign depth = entry.url | split: '/' | size %}
+    {% if current == include.context and depth < 4 %}
+        {% unless entry.exclude %}
+            {% assign loopNumber = loopNumber | plus:1 %}
+            {% if depth < 3 %}
+                {% assign i = i | plus:1 %}
+                {% if lastDepth == 0 %}
+                    <span>
+                        <a class="page-link link-{{i}} {% if page.url contains entry.url %} active{% endif %}" href="{{ site.baseurl }}{{ entry.url }}">{{ entry.title | downcase }}</a>
+                {% else if lastDepth > depth %}
+                        </ul> 
+                    </span>
+                    <span>
+                        <a class="page-link link-{{i}} {% if page.url contains entry.url %} active{% endif %}" href="{{ site.baseurl }}{{ entry.url }}">{{ entry.title | downcase }}</a>
+                {% else if lastDepth == depth %}
+                    </span>
+                    <span>
+                        <a class="page-link link-{{i}} {% if page.url contains entry.url %} active{% endif %}" href="{{ site.baseurl }}{{ entry.url }}">{{ entry.title | downcase }}</a>
+                {% endif %}         
+                {% include navigation.html context=entry.url i=i loopNumber=loopNumber subnav=true lastDepth=lastDepth %}
+            {% else %}
+                {% if lastDepth < depth %}
+                    <ul class="subpages">
+                        <li>
+                            <a class="page-link {% if page.url contains entry.url %}active{% endif %}" href="{{ site.baseurl }}{{ entry.url }}">{{ entry.title | downcase }}</a>
+                        </li>
+                {% else if lastDepth == depth %}
+                    <li>
+                        <a class="page-link {% if page.url contains entry.url %}active{% endif %}" href="{{ site.baseurl }}{{ entry.url }}">{{ entry.title | downcase }}</a>
+                    </li>
+                {% endif %}
+            {% endif %}
+            {% assign lastDepth = depth %}
+        {% endunless %}
+    {% endif %}
+{% endfor %}

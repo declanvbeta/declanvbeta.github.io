@@ -1,0 +1,16 @@
+{% assign section = include.section | append: "/" %}
+{% assign type = include.type %}
+{% assign art = include.art %}
+
+{% assign small_img_path = "/assets/images/" | append: section | append: type | append: "/small/" | append: art.small-image %}
+{% assign tiny_img_path = "/assets/images/" | append: section | append: type | append: "/tiny/" | append: art.small-image %}
+
+{% assign size_array = {{art.size}} | split: "x" %}
+{% assign aspect_ratio = size_array[0] | times: 1.0 | divided_by: size_array[1] | times: 1.0 | times: 100 | round: 1 %}
+{% capture padding_bottom %}
+padding-bottom:{{aspect_ratio}}%;
+{% endcapture %}
+
+<figure class="img-container art-project grid-item">
+    <img class="image lazy blur" src="{{tiny_img_path | absolute_url}}" alt="{{art.alt}}" data-src="{{small_img_path | absolute_url}}">
+</figure>

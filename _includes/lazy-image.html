@@ -1,0 +1,74 @@
+{% assign section = include.section %}
+{% assign type = include.type %}
+{% assign art = include.art %}
+
+{% assign small_img_path = "/assets/images/" | append: section | append: type | append: "/small/" | append: art.small-image %}
+{% assign tiny_img_path = "/assets/images/" | append: section | append: type | append: "/tiny/" | append: art.small-image %}
+
+{% assign size_array = {{art.size}} | split: "x" %}
+{% assign aspect_ratio = size_array[0] | times: 1.0 | divided_by: size_array[1] | times: 1.0 | times: 100 | round: 2 %}
+{% capture padding_bottom %}
+    style="padding-bottom:{{aspect_ratio}}%;"
+{% endcapture %}
+
+{% capture img_height %}
+    {{size_array[0]}}
+{% endcapture %}
+{% capture img_width %}
+    {{size_array[1]}}
+{% endcapture %}
+
+{% if art.project %}
+    {% assign large_img_path = "/assets/images/" | append: section | append: type | append: "/large/" | append: art.large-image %}
+    <!-- <div class="art-project grid-item"> -->
+    <figure class="img-container art-project grid-item project">
+        <a href="{{ large_img_path | absolute_url}}" data-size="{{ art.size }}" class="no-barba">
+            <img class="image lazy blur" src="{{tiny_img_path | absolute_url}}" alt="{{art.alt}}" data-src="{{small_img_path | absolute_url}}">
+        </a>
+        <figcaption>
+            <div class="title">{{art.title}}</div>
+            <div class="project-link">
+                <a href="{{art.url}}">
+                    <span class="project-link-text">See the whole project</span>
+                </a>
+            </div>
+            <div class="details">
+                {% if art.description %}
+                    <span class="description">
+                        {{art.description}}
+                    </span>
+                {% endif %}
+                {% if art.medium %}
+                    <span class="medium">
+                        {{art.medium}}
+                    </span>
+                {% endif %}
+            </div>
+        </figcaption>
+    </figure>
+    <!-- </div>  -->
+{% else %}
+    {% assign large_img_path = "/assets/images/" | append: section | append: type | append: "/large/" | append: art.large-image %}
+    <!-- <div class="art-project grid-item"> -->
+    <figure class="img-container art-project grid-item">
+        <a href="{{ large_img_path | absolute_url}}" data-size="{{ art.size }}" class="no-barba">
+            <img class="image lazy blur" src="{{tiny_img_path | absolute_url}}" alt="{{art.alt}}" data-src="{{small_img_path | absolute_url}}">
+        </a>
+        <figcaption class="title">
+            {{art.title}}
+            <div class="details">
+                {% if art.description %}
+                <span class="description">
+                    {{art.description}}
+                </span>
+                {% endif %}
+                {% if art.medium %}
+                <span class="medium">
+                    {{art.medium}}
+                </span>
+                {% endif %}
+            </div>
+        </figcaption>
+    </figure>
+<!-- </div>  -->
+{% endif %}

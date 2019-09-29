@@ -1,0 +1,43 @@
+---
+layout: default
+title: Photo
+weight: 3
+hex: 350941
+custom_css:
+- photoswipe
+- default-skin
+custom_js:
+- jquery-3.2.1.min
+- imagesloaded.pkgd.min.js
+- masonry.pkgd.min
+- masonry-custom
+- gallery-custom
+- photoswipe.min
+- photoswipe-ui-default.min
+---
+
+<div class="section-title">
+    <h4>
+        Photo
+    </h4>
+</div>
+
+<h5 class="subsection-title">
+    <a href="holga">Holga</a>
+</h5>
+<hr>
+
+<div class="projects-container grid hide gallery-1">
+    {% include art-list.html section='photo' type='holga' %}
+</div>
+
+<h5 class="subsection-title">
+    <a href="other">Other</a>
+</h5>
+<hr>
+
+<div class="projects-container grid hide gallery-2">
+    {% include art-list.html section='photo' type='other' %}
+</div>
+
+{% include photoswipe.html %}

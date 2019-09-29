@@ -1,0 +1,29 @@
+.pswp {
+  .pswp__caption {
+    @include body-font();
+    .project-link {
+      transform: translateX(-200px);
+      @include text-in-left(1.2s, cubic-bezier(0, 0.58, 0, 1));
+      a {
+        color: white;
+        &:hover {
+          text-decoration: none;
+        }
+      }
+    }
+    .details {
+      @include body-light();
+      span:first-of-type + span {
+
+        &:before {
+          content: "|";
+          position: relative;
+          display: inline-block;
+          padding: 0 10px;
+        }
+
+      }
+      //font-size: 10px;
+    }
+  }
+}

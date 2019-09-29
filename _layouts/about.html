@@ -1,0 +1,94 @@
+---
+layout: default
+hex: FDB170
+---
+{% assign img_path = "/assets/images/about/" %}
+
+<main class="page-content" aria-label="Content">
+
+	<div class="about-container">
+		<div class="background-color one"></div>
+		<div class="background-color two"></div>
+
+		<div class="collage-container">
+			<div class="collage-grid">
+				<div class="collage-row">
+					<div class="collage-col">
+						<div class="circle pink"></div>
+					</div>
+					<div class="collage-col portrait">
+						<div class="portrait-wrapper">
+							<img class="portrait" src="{{ img_path | append: 'picture-of-me-b-w.jpg' }}" alt="A close-cropped portrait of a man with a beard and brown hair, wearing a suit">
+						</div>
+					</div>
+					<div class="collage-col">
+						<div class="vertical pink"></div>
+						<div class="horizontal blue"></div>
+					</div>
+				</div>
+				<div class="collage-row">
+					<div class="collage-col">
+						<img class="photo" src="{{ img_path | append: 'peony.jpg' }}" alt="A close-cropped portrait of a man with a beard and brown hair, wearing a suit">
+					</div>
+					<div class="collage-col">
+						<div class="vertical blue"></div>
+					</div>
+					<div class="collage-col">
+						<div class="horizontal pink"></div>
+					</div>
+				</div>
+				<div class="collage-row">
+					<div class="collage-col">
+						<div class="horizontal yellow thin"></div>
+					</div>
+					<div class="collage-col">
+						<div class="horizontal yellow"></div>
+						{% comment %}	
+							<div class="circle white"></div>	
+						{% endcomment %}
+					</div>
+					<div class="collage-col">
+						<img class="art" src="{{ img_path | append: 'ayesha-crop.jpg' }}" alt="A drawing of a nude woman wearing a headscarf">
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+
+
+	<div class="wrapper content">
+		<div class="intro-wrapper">
+
+			<div class="intro-container">
+
+				{% comment %} 
+				The art and photo images should be randomized, and therefore should be defined as a list, probably at the top of this file
+				{% endcomment %}
+
+				<div class="intro-text-container">
+					<div class="hey-container">
+						<div class="hey">
+							Oh, hey!
+						</div>
+					</div>
+					<div class="intro-text">
+						I'm an artist, Web Designer, Developer, and faculty member at the School of Visual Arts.
+					</div>
+
+					<div class="link-container">
+						<div class="link-wrapper">
+							<a class="link" href="mailto:declanv@gmail.com">
+								Reach out
+							</a>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</main>
+
+

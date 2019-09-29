@@ -1,0 +1,32 @@
+#transition-shape {
+  position: absolute;
+  display: none;
+  top: 0;
+  left: 0;
+  height: 300%;
+  width: 0px;
+  z-index: 10000;
+  // background-color: black;
+  border-radius: 0 100% 100% 0;
+
+  &.transition-in {
+  	display: block;
+  	// border-radius: 100%;
+
+  	border-radius: 0 100% 100% 0;
+
+
+  	// background-color: black;
+  	// opacity: 100%;
+  	// box-shadow: 0 0 0 150vw black, 0 0 0 150vh black;
+  	@include pageTransitionAnimateIn();
+  }
+
+  &.transition-out {
+  	// display: none;
+  	// background-color: transparent;
+  	// opacity: 0;
+  	// box-shadow: 0 0 0 0 transparent, 0 0 0 0 transparent;
+  	@include pageTransitionAnimateOut();
+  }
+}

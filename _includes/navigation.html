@@ -1,0 +1,44 @@
+{% assign entries = site.html_pages | sort: "weight" %}
+
+{% for entry in entries %}
+
+    {% capture slug %}{{ entry.url | split: "/"   | last }}{% endcapture %}
+    {% capture current %}{{ entry.url | remove: slug | remove: "//" | append: "/" }}{% endcapture %}
+    {% assign depth = entry.url | split: '/' | size %}
+    {% if current == include.context and depth < 4 %}
+        {% unless entry.exclude %}
+            {% assign loopNumber = loopNumber | plus:1 %}
+            {% if depth < 3 %}
+                {% assign i = i | plus:1 %}
+                {% if lastDepth == 0 %}
+                    <li>
+                        <a class="page-link link-{{i}} {% if page.url contains entry.url %} active{% endif %}" href="{{ site.baseurl }}{{ entry.url }}" {% if entry.hex %}data-hex="{{entry.hex}}"{% endif %}>{{ entry.title | downcase }}</a>
+                {% else if lastDepth > depth %}
+                        </ul> 
+                    </li>
+                    <li>
+                        <a class="page-link link-{{i}} {% if page.url contains entry.url %} active{% endif %}" href="{{ site.baseurl }}{{ entry.url }}" {% if entry.hex %}data-hex="{{entry.hex}}"{% endif %}>{{ entry.title | downcase }}</a>
+                {% else if lastDepth == depth %}
+                    </li>
+                    <li>
+                        <a class="page-link link-{{i}} {% if page.url contains entry.url %} active{% endif %}" href="{{ site.baseurl }}{{ entry.url }}" {% if entry.hex %}data-hex="{{entry.hex}}"{% endif %}>{{ entry.title | downcase }}</a>
+                {% endif %}         
+                {% include navigation.html context=entry.url i=i loopNumber=loopNumber subnav=true lastDepth=lastDepth %}
+            {% else %}
+                {% if lastDepth < depth %}
+                    {% assign subI = 1 %}
+                    <ul class="subpages">
+                    <li>
+                        <a class="page-link link-1 {% if page.url contains entry.url %}active{% endif %}" href="{{ site.baseurl }}{{ entry.url }}" {% if entry.hex %}data-hex="{{entry.hex}}"{% endif %}>{{ entry.title | downcase }}</a>
+                    </li>
+                {% else if lastDepth == depth %}
+                    {% assign subI = subI | plus:1 %}
+                    <li>
+                        <a class="page-link link-{{subI}} {% if page.url contains entry.url %}active{% endif %}" href="{{ site.baseurl }}{{ entry.url }}" {% if entry.hex %}data-hex="{{entry.hex}}"{% endif %}>{{ entry.title | downcase }}</a>
+                    </li>
+                {% endif %}
+            {% endif %}
+            {% assign lastDepth = depth %}
+        {% endunless %}
+    {% endif %}
+{% endfor %}

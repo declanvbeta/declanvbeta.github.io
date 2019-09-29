@@ -24,13 +24,14 @@
   "homepage": "https://github.com/declanv/declanv.github.io#readme",
   "dependencies": {},
   "devDependencies": {
-    "browser-sync": "^2.23.6",
+    "browser-sync": "^2.23.7",
     "gulp": "^3.9.1",
     "gulp-cached": "^1.1.1",
     "gulp-concat": "^2.6.1",
     "gulp-sass": "^3.2.1",
     "gulp-sourcemaps": "^2.6.4",
     "gulp-uglify": "^3.0.0",
-    "gulp-util": "^3.0.8"
+    "gulp-util": "^3.0.8",
+    "hoek": "^5.0.3"
   }
 }

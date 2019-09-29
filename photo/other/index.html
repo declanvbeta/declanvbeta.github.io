@@ -1,0 +1,24 @@
+---
+layout: default
+title: Other
+weight: 2
+hex: FDB170
+<!-- subpages: Illustration, Figure Drawings, Other Art -->
+custom_css:
+- photoswipe
+- default-skin
+custom_js:
+- jquery-3.2.1.min
+- imagesloaded.pkgd.min.js
+- masonry.pkgd.min
+- masonry-custom
+- gallery-custom
+- photoswipe.min
+- photoswipe-ui-default.min
+---
+
+<div class="projects-container grid hide">
+	{% include art-list.html section='photo' type='other' %}
+</div>
+
+{% include photoswipe.html %}

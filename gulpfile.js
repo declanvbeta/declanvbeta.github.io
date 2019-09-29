@@ -25,28 +25,32 @@ var files = {
 		js: {
 			vendor: [
 				jsVendor + 'jquery-3.2.1.min.js',
-			 	jsVendor + 'masonry.pkgd.min.js',
-		 	 	jsVendor + 'photoswipe.min.js',
+			 	// jsVendor + 'masonry.pkgd.min.js',
+		 	 	// jsVendor + 'photoswipe.min.js',
+				jsVendor + 'macy.js',
 	 	 		jsVendor + 'photoswipe.min.js',
 	 	 		jsVendor + 'photoswipe-ui-default.min.js',
 	 	 		jsVendor + 'barba.min.js'
  	 		],
 			custom: [
-				js + 'gallery-custom.js',
+				// js + 'gallery-custom.js',
 				js + 'masonry-custom.js',
 				js + 'scroll-into-view.js',
+				js + 'image-optimizer.js',
 				js + 'page-transitions.js'
 			],
 			all: [
 				jsVendor + 'jquery-3.2.1.min.js',
+			 	jsVendor + 'imagesloaded.pkgd.min.js',
+				jsVendor + 'macy.js',
 			 	jsVendor + 'masonry.pkgd.min.js',
-		 	 	jsVendor + 'photoswipe.min.js',
 	 	 		jsVendor + 'photoswipe.min.js',
 	 	 		jsVendor + 'photoswipe-ui-default.min.js',
 	 	 		jsVendor + 'barba.min.js',
-				js + 'gallery-custom.js',
+				// js + 'gallery-custom.js',
 				js + 'masonry-custom.js',
 				js + 'scroll-into-view.js',
+				js + 'image-optimizer.js',
 				js + 'page-transitions.js'
 			]
 		}
@@ -60,6 +64,7 @@ var files = {
 
 gulp.task('serve', () => {
   browserSync.init({
+    notify: false,
     files: [siteRoot + '/**'],
     port: 4000,
     server: {

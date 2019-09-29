@@ -1,0 +1,7 @@
+{% assign letters = include.letters %}
+
+<div class="letter-container">
+    {% for letter in letters %}
+        <span class="fade-in-letter letter-{{ forloop.index }}">{{ letter }}</span>
+    {% endfor %}
+</div>

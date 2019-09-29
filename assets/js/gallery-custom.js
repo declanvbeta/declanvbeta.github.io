@@ -1,7 +1,6 @@
 $(function() {
 
-
-	// $('.grid').masonry({
+    // $('.grid').masonry({
 	// 	columnWidth: 200,
 	// 	itemSelector: '.grid-item'
 	// });
@@ -74,8 +73,6 @@ var initPhotoSwipeFromDOM = function(gallerySelector) {
                 w: parseInt(size[0], 10),
                 h: parseInt(size[1], 10)
             };
-
-
 
             if(figureEl.children.length > 1) {
                 // <figcaption> content
@@ -173,6 +170,7 @@ var initPhotoSwipeFromDOM = function(gallerySelector) {
     };
 
     var openPhotoSwipe = function(index, galleryElement, disableAnimation, fromURL) {
+        console.log("open photoswipe is firing");
         var pswpElement = document.querySelectorAll('.pswp')[0],
             gallery,
             options,
@@ -227,6 +225,16 @@ var initPhotoSwipeFromDOM = function(gallerySelector) {
 
         // Pass data to PhotoSwipe and initialize it
         gallery = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, items, options);
+
+        gallery.listen('gettingData', function(index, item) {
+            console.log("okay, i'm inside the gallery listen function");
+            if(index === 0) {
+                console.log('here is the item in the gallery listen function:', item);
+                item.html = '<div>Dynamically generated HTML ' + Math.random() + '</div>';
+            }
+
+        });
+
         gallery.init();
     };
 
@@ -249,6 +257,6 @@ var initPhotoSwipeFromDOM = function(gallerySelector) {
 initPhotoSwipeFromDOM('.projects-container');
 
 
-
-
 });
+
+

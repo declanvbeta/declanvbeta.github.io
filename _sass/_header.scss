@@ -42,13 +42,14 @@
     text-decoration: none;
 
     vertical-align: bottom;
-    z-index: 100;
+    z-index: 1000;
     text-shadow: none;
     border-bottom: none;
     width: 100%;
     top: 0;
     @include border-box();
     padding: 10px 0;
+    overflow: visible;
     // If I decide I want a shadow under the header, here is the best option:
     // box-shadow: 5px 10px 40px 10px rgba(0, 0, 0, 0.1);
     // @include gradient-shadow();
@@ -94,26 +95,46 @@
 		text-decoration: none;
 		position: relative;
 		display: inline-block;
+		float: none;
 
 	}
 
-	.trigger {
-		.page-link {
-			position: relative;
-			display: inline-block;
-		    z-index: 2;
-		}
-	}
 
-	.site-title,
-	.trigger .page-link {
-		@include nav-button($site-blue, white);
-
+	.page-link {
+		position: relative;
+		display: inline-block;
+	    z-index: 2;
 	}
+	
 
 	.site-nav {
 		line-height: 25px;
+		float: none;
+		@include display-flex();
+		@include flex-direction-row();
+
+
+		.site-title-wrapper,
+		.page-link {
+			@include flex(1 0 auto);
+		}
+
+		.site-title,
+		.page-link {
+			// @include flex(1 0 auto);
+			@include nav-button($site-blue, white);
+		}
+
+		.site-title-wrapper {
+			align-self: flex-start;
+		}
+
+		.page-link {
+			align-self: flex-end;
+		}
+
 	}
+
 
 }
 
@@ -125,24 +146,241 @@
   		// background-image: linear-gradient($site-orange, transparent);
 
 		.site-title,
-		.trigger .page-link {
-			@include nav-button($site-blue, white);
+		.page-link {
+			@include nav-button($site-blue, $site-pink);
 		}
 	}
 }
 
-.web,
-.art,
-.photo,
+
+// Here's the idea:
+// The user will hover over the art link and the subnav links will reveal one by one below
+// Meanwhile, the initial underline will animate around the outskirts of the subnav until it's outlined
+// Then, we'll use a little js (or maybe we can get away with a hover state) to detect when the user is no longer hovering over the subnav items and we'll then close them 
+
+
+@keyframes openSubNav {
+  0% {
+    // border-radius: 50% 50% 50% 50%;
+    // border-radius: 0;
+    // transform: skewY(45deg);
+
+    background-color: transparent;
+
+  }
+
+  10% {
+    box-shadow: 0 0 0 0 transparent, 0 0 0 0 transparent;
+  }
+
+  80% {
+    background-color: black;
+
+  }
+  100% {
+
+    // border-radius: 0 0 0 0;
+    // background-color: black;
+    box-shadow: 0 0 0 150vw black, 0 0 0 150vh black;
+  }
+}
+
+@mixin openSubNav() {
+  @include prefix-animation(openSubNav 0.75s ease-in-out forwards);
+}
+
+
+
+.site-nav li {
+	position: relative;
+	display: inline-block;
+
+	.subpages {
+
+		position: absolute;
+		visibility: hidden;
+		// display: none;
+		left: 0;
+		top: 45px;
+		padding-top: 10px;
+		height: auto;
+		width: auto;
+		z-index: 300;	
+		margin: 0;
+		opacity: 0;
+		border: 1.5px solid transparent;
+		border-top: none;
+
+		.subpage {
+
+			@include subnav-button($site-blue, white);
+			position: relative;
+			display: block;
+			opacity: 0;
+			// min-height: 50px;
+		}
+	}
+
+	&:hover {
+
+		.subpages {
+			display: block;
+			background-color: white;
+			border: 1.5px solid $site-pink;
+			border-top: none;
+			@include animate-in-subnav();
+
+			.subpage {
+				$subNavLinks: 4;
+
+				@for $i from 1 through $subNavLinks {
+					$time: #{$i*.2}s;
+					&.link-#{$i} { 
+
+						@include fadeInSubNavLinks($time);
+
+					}
+
+				}
+			}
+		}
+
+
+	}
+}
+
 .about {
 	.site-header {
+		.site-nav {
+			.site-title-wrapper {
+				@include hamburger($about-pink, $about-dark-blue);	
+			}	
+		}
 
-  		// background-image: linear-gradient(white, transparent);
 
 		.site-title,
-		.trigger .page-link {
+		.page-link {
+			@include nav-button($about-pink, $about-dark-blue);
+		}
+
+	}
+}
+
+// Page-specific header styles:
+.art {
+	.site-header {
+
+		// background-image: linear-gradient(white, transparent);
+		.site-nav {
+			li:hover {
+				.subpages {
+					border: 1.5px solid $site-blue;
+					border-top: none;
+				}
+			}
+			.site-title-wrapper {
+				@include hamburger($site-pink, $site-blue);
+			}
+		}
+
+
+		.site-title,
+		.page-link {
+			@include nav-button($site-pink, $site-blue);
+		}
+	}
+}
+
+.photo {
+	.site-header {
+
+		// background-image: linear-gradient(white, transparent);
+		.site-nav {
+			li:hover {
+				.subpages {
+					border: 1.5px solid $site-blue;
+					border-top: none;
+				}
+			}
+			.site-title-wrapper {
+				@include hamburger($site-purple, $site-yellow);
+			}
+		}
+
+
+		.site-title,
+		.page-link {
+			@include nav-button($site-purple, $site-yellow);
+		}
+	}
+}
+
+.web {
+	.site-header {
+
+		// background-image: linear-gradient(white, transparent);
+		.site-nav {
+			li:hover {
+				.subpages {
+					border: 1.5px solid $site-blue;
+					border-top: none;
+				}
+			}
+			.site-title-wrapper {
+				@include hamburger($site-blue, $site-orange);
+			}
+		}
+
+
+		.site-title,
+		.page-link {
 			@include nav-button($site-blue, $site-orange);
 		}
+
+		@mixin pageHeaderStyles($color1, $color2, $color3) {
+			.site-title,
+			.page-link {
+				// @include web-project($sightseer-red, $sightseer-blue, $sightseer-grey);
+				@include nav-button($color1, $color2);
+			}
+
+			.site-nav {
+				li:hover {
+					.subpages {
+						background-color: $color3;
+						border: 1.5px solid $color2;
+						border-top: none;
+						.page-link {
+							@include nav-button($color1, $color2);
+						}
+					}
+				}
+				.site-title-wrapper {
+					@include hamburger($color3, $color2);
+				}
+			}
+		}
+
+
+		&.sva {
+			@include pageHeaderStyles($sva-today-grey, $sva-blue, $sva-red);
+		}
+		&.sva-redesign {
+			@include pageHeaderStyles($sva-redesign-grey, $sva-redesign-blue, $sva-redesign-red);
+		}
+		&.relay {
+			@include pageHeaderStyles($relay-grey, $relay-blue, $relay-red);
+		}
+		&.sightseer {
+			@include pageHeaderStyles($sightseer-grey, $sightseer-blue, $sightseer-red);
+		}
+		&.ritandeclan {
+			@include pageHeaderStyles($ritandeclan-grey, $ritandeclan-blue, $ritandeclan-pink);
+		}
+		&.e-blast-builder {
+			@include pageHeaderStyles($sva-today-grey, $sva-today-blue, $sva-today-red);
+		}
+
 
 	}
 

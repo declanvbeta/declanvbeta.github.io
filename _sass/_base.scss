@@ -27,12 +27,13 @@ body {
 	// &:before {
 	// 	height: 100%;
 	// }
-	height: 100%;
+	//height: 100%;
 	// background-color: transparent;
 	// overflow-x: hidden;
 	// overflow-y: scroll;
 	z-index: 5;
 	// background-color: map_get($colors, 'purple');
+	//overflow-x: hidden;
 
 	p {
 		font-family: NunitoSans-Regular, sans-serif;
@@ -44,7 +45,16 @@ body {
 
 	}
 
+	.barba-container {
+		overflow-x: hidden;
 
+	}
+
+	&.about {
+		.barba-container {
+			overflow-x: visible;
+		}
+	}
 
 
 }
@@ -61,8 +71,8 @@ body {
 
 .page-content {
 	position: relative;
-	margin-top: 50px;
-
+	//margin-top: 80px;
+	padding-top: 110px;
 	@include flex(1);
 
 	p {
@@ -71,10 +81,58 @@ body {
 }
 
 .section-title {
+	@include body-font-wide();
 	font-size: 40px;
 	text-transform: uppercase;
+	text-align: left;
+	letter-spacing: 2px;
+	color: grey;
 	h4 {
 		font-weight: 900;
+	}
+	 //This part is to add in a loading animation
+	&:after {
+		content: '';
+		background: url('../images/loader.svg');
+		position: absolute;
+		left: 50%;
+		top: 10%;
+		//stroke: $site-pink;
+		z-index: 2000;
+		height: 50px;
+		width: 50px;
+		display: block;
+	}
+
+	&.loaded {
+		&:after {
+			display: none;
+		}
+	}
+}
+
+hr {
+	margin: 10px 0 20px 0;
+	border: none;
+	//border-top: 3px double lightgrey;
+	border-top: 2px solid lightgrey;
+	color: lightgrey;
+	overflow: hidden;
+	text-align: center;
+	height: 10px;
+}
+
+.subsection-title {
+	@include body-font-wide();
+	text-align: left;
+	margin: 150px 0 25px;
+
+	&:first-of-type {
+		margin-top: 50px;
+	}
+	a:hover,
+	a:active {
+		text-decoration: none;
 	}
 }
 
@@ -105,6 +163,10 @@ body {
 			}
 		}
 	}
+}
+
+@media (min-width: 985px) {
+
 }
 
 

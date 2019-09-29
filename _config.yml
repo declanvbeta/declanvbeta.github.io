@@ -35,11 +35,11 @@ plugins:
   - jekyll-feed
 permalink: pretty
 
-header_pages:
-  - web.html
-  - art.html
-  - photography.html
-  - about.html
+# header_pages:
+#   - web.html
+#   - art.html
+#   - photography.html
+#   - about.html
 
 collections:
   # projects:   
@@ -48,9 +48,12 @@ collections:
   webs:
     output: true 
     permalink: /web/:path
-  arts:
-    output: true 
-    permalink: /art/:path
+#  arts:
+#    output: true
+#    permalink: /art/:path
+  # illustrations:
+  #   output: true 
+  #   permalink: /illustration/:path
 
 #     webs:
 #        - scope:
