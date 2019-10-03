@@ -54,26 +54,7 @@
 		overflow: hidden;
 
 
-		.image {
-			position: relative;
-			display: block;
-			transform: none;
-			width: 100%;
-			height: auto;
-			//visibility: hidden;
-			// max-width: 50%;
-			// max-height: 50%;
 
-			//&.blur {
-			//	position: relative;
-			//	display: block;
-			//	width: 100%;
-			//	height: auto;
-			//	filter: blur(18px);
-			//	transform: scale(1.1);
-			//}
-
-		}
 
 		a {
 			position: relative;
@@ -81,15 +62,38 @@
 			@include border-box();
 			padding: 10px;
 
-			&.unblur {
-				//padding-bottom: 10px !important;
-				.image {
-					@include unBlur(0s, 0s);
+			.image {
+				position: relative;
+				display: block;
+				transform: none;
+				width: 100%;
+				height: auto;
+				overflow: hidden;
+				//visibility: hidden;
+				// max-width: 50%;
+				// max-height: 50%;
 
-                  //height: initial !important;
+				&.blur {
+					filter: blur(18px);
+					@include transform(scale(0.9));
+				}
+				&.unblur {
+					filter: blur(0);
+					@include transform(none);
 				}
 
 			}
+
+			//&.unblur {
+			//	//padding-bottom: 10px !important;
+			//	.image {
+			//
+			//		@include unBlur(0s, 0s);
+			//
+            //      //height: initial !important;
+			//	}
+			//
+			//}
 		}
 
 		.title,

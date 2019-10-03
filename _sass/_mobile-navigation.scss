@@ -79,7 +79,7 @@
 							}
 							&:before {
 								top: -10px;
-							} 
+							}
 							&:after {
 								bottom: -10px;
 							}
@@ -132,7 +132,7 @@
 							display: inline-block;
 
 							@include openMobileNav();
-							padding: 12px 46px 0 0;
+							padding: 6px 46px 0 0;
 
 							.hamburger {
 								background-color: white;
@@ -149,7 +149,7 @@
 									transform: rotate(90deg);
 									top: 0;
 								}
-							}	
+							}
 						}
 
 					}
@@ -158,7 +158,11 @@
 						@include flex(2 1 auto);
 						@include display-flex();
 						@include flex-direction-column();
+						padding-top: 2%;
 
+						@media (max-width:450px) {
+							padding-top: 5%;
+						}
 
 						&.subnav-open {
 
@@ -170,7 +174,7 @@
 
 						.page-link {
 							display: block;
-							margin: 5% 0 6% 0;
+							margin: 5% 0 8% 0;
 							//padding-bottom: 5%;
 							text-align: center;
 							opacity: 0;
@@ -179,19 +183,19 @@
 
 
 
-							//opacity: 1;
-							//padding: 0;
-							//margin: 0;
-							//
-							//&:hover {
-							//
-							//	.subpages {
-							//		border: none;
-							//		visibility: hidden;
-							//		opacity: 0;
-							//		display: none;
-							//	}
-							//}
+						//opacity: 1;
+						//padding: 0;
+						//margin: 0;
+						//
+						//&:hover {
+						//
+						//	.subpages {
+						//		border: none;
+						//		visibility: hidden;
+						//		opacity: 0;
+						//		display: none;
+						//	}
+						//}
 
 
 						.subpages {
@@ -265,10 +269,6 @@
 
 							//padding: 4px 0 5% 0;
 
-							&.active {
-								margin-bottom: 0;
-							}
-
 							// the delay was originally 0.2s for all of them
 							// @include fadeInMobileLinks(0.2s);
 
@@ -276,7 +276,7 @@
 
 							@for $i from 1 through $navLinks {
 								$time: #{$i*.25}s;
-								&.link-#{$i} { 
+								&.link-#{$i} {
 
 									@include fadeInMobileLinks($time);
 
@@ -286,6 +286,7 @@
 						}
 
 						&.subnav-open {
+
 							// .page-link:not(.selected) {
 							.page-link {
 								font-size: 16px;
@@ -295,6 +296,10 @@
 								margin: 4% 0;
 								//padding: 4px 0 4% 0;
 								opacity: 0.8;
+
+								&.active {
+									margin-bottom: 0;
+								}
 
 								&.selected {
 									@include expand-underline($site-pink, 3px);

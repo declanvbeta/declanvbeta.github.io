@@ -760,7 +760,7 @@
 							//display: inline-block;
 
 							.tech-item {
-								font-size: 16px;
+								font-size: 18px;
 								span {
 									&:after {
 										display: inline-block;
@@ -777,11 +777,16 @@
 
 	@media (max-width: 650px) {
 
+		.page-nav {
+			@include transform(scale(0.8));
+		}
+
 		.content-container,
 		.objective-container {
 			padding: 40px 30px 30px 30px;
 		}
 		.objective-container {
+			width: 100%;
 			.title-container {
 				left: 28%;
 			}
@@ -789,6 +794,24 @@
 				.objective {
 					font-size: 16px;
 
+				}
+			}
+		}
+		.content-container {
+			.intro-text-container {
+
+				.description-container {
+
+					.tech-wrapper {
+
+						.tech-list {
+							//display: inline-block;
+
+							.tech-item {
+								font-size: 15px;
+							}
+						}
+					}
 				}
 			}
 		}

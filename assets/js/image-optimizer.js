@@ -18,15 +18,16 @@ var imageOptimizer = function(galleryContainer, masonryInstance) {
                         var downloadingImage = new Image();
                         downloadingImage.onload = function () {
                             lazyImage.src = this.src;
+                            $lazyImage = $(lazyImage);
+                            // $lazyImage.parent().addClass('unblur');
+                            $lazyImage.removeClass('blur');
+                            lazyImage.classList.add('unblur');
                             if (masonryInstance !== null && typeof masonryInstance !== undefined) {
                                 $(galleryContainer).masonry('layout');
                             }
                         }
                         downloadingImage.src = lazyImage.dataset.src;
-                        $lazyImage = $(lazyImage);
-                        $lazyImage.parent().addClass('unblur');
-                        $lazyImage.removeClass('blur');
-                        lazyImage.classList.add('unblur');
+
                         lazyImageObserver.unobserve(lazyImage);
                     } else {
                     }

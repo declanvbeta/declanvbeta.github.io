@@ -99,20 +99,17 @@
 
 	}
 
-
 	.page-link {
 		position: relative;
 		display: inline-block;
 	    z-index: 2;
 	}
-	
 
 	.site-nav {
 		line-height: 25px;
 		float: none;
 		@include display-flex();
 		@include flex-direction-row();
-
 
 		.site-title-wrapper,
 		.page-link {
@@ -122,7 +119,7 @@
 		.site-title,
 		.page-link {
 			// @include flex(1 0 auto);
-			@include nav-button($site-blue, white);
+			@include nav-button($site-blue, $site-pink);
 		}
 
 		.site-title-wrapper {
@@ -151,7 +148,6 @@
 		}
 	}
 }
-
 
 // Here's the idea:
 // The user will hover over the art link and the subnav links will reveal one by one below
@@ -188,8 +184,6 @@
 @mixin openSubNav() {
   @include prefix-animation(openSubNav 0.75s ease-in-out forwards);
 }
-
-
 
 .site-nav li {
 	position: relative;
@@ -246,6 +240,55 @@
 		}
 
 
+	}
+}
+
+
+@mixin webProjectHeaderStyles($color1, $color2, $color3) {
+	.site-title,
+	.page-link {
+		// @include web-project($sightseer-red, $sightseer-blue, $sightseer-grey);
+		@include nav-button($color1, $color2);
+	}
+
+	.site-nav {
+		li:hover {
+			.subpages {
+				background-color: $color3;
+				border: 1.5px solid $color2;
+				border-top: none;
+				.page-link {
+					@include nav-button($color1, $color2);
+				}
+			}
+		}
+		.site-title-wrapper {
+			@include hamburger($color3, $color2);
+		}
+	}
+}
+
+@mixin pageHeaderStyles($color1, $color2) {
+	.site-title,
+	.page-link {
+		// @include web-project($sightseer-red, $sightseer-blue, $sightseer-grey);
+		@include nav-button($color1, $color2);
+	}
+
+	.site-nav {
+		li:hover {
+			.subpages {
+				//background-color: $color3;
+				border: 1.5px solid $color2;
+				border-top: none;
+				.page-link {
+					@include nav-button($color1, $color2);
+				}
+			}
+		}
+		.site-title-wrapper {
+			@include hamburger($color1, $color2);
+		}
 	}
 }
 
@@ -316,72 +359,26 @@
 }
 
 .web {
-	.site-header {
 
-		// background-image: linear-gradient(white, transparent);
-		.site-nav {
-			li:hover {
-				.subpages {
-					border: 1.5px solid $site-blue;
-					border-top: none;
-				}
-			}
-			.site-title-wrapper {
-				@include hamburger($site-blue, $site-orange);
-			}
-		}
+	@include pageHeaderStyles($site-blue, $site-orange);
 
-
-		.site-title,
-		.page-link {
-			@include nav-button($site-blue, $site-orange);
-		}
-
-		@mixin pageHeaderStyles($color1, $color2, $color3) {
-			.site-title,
-			.page-link {
-				// @include web-project($sightseer-red, $sightseer-blue, $sightseer-grey);
-				@include nav-button($color1, $color2);
-			}
-
-			.site-nav {
-				li:hover {
-					.subpages {
-						background-color: $color3;
-						border: 1.5px solid $color2;
-						border-top: none;
-						.page-link {
-							@include nav-button($color1, $color2);
-						}
-					}
-				}
-				.site-title-wrapper {
-					@include hamburger($color3, $color2);
-				}
-			}
-		}
-
-
-		&.sva {
-			@include pageHeaderStyles($sva-today-grey, $sva-blue, $sva-red);
-		}
-		&.sva-redesign {
-			@include pageHeaderStyles($sva-redesign-grey, $sva-redesign-blue, $sva-redesign-red);
-		}
-		&.relay {
-			@include pageHeaderStyles($relay-grey, $relay-blue, $relay-red);
-		}
-		&.sightseer {
-			@include pageHeaderStyles($sightseer-grey, $sightseer-blue, $sightseer-red);
-		}
-		&.ritandeclan {
-			@include pageHeaderStyles($ritandeclan-grey, $ritandeclan-blue, $ritandeclan-pink);
-		}
-		&.e-blast-builder {
-			@include pageHeaderStyles($sva-today-grey, $sva-today-blue, $sva-today-red);
-		}
-
-
+	&.sva {
+		@include webProjectHeaderStyles($sva-today-grey, $sva-blue, $sva-red);
+	}
+	&.sva-redesign {
+		@include webProjectHeaderStyles($sva-redesign-grey, $sva-redesign-blue, $sva-redesign-red);
+	}
+	&.relay {
+		@include webProjectHeaderStyles($relay-grey, $relay-blue, $relay-red);
+	}
+	&.sightseer {
+		@include webProjectHeaderStyles($sightseer-grey, $sightseer-blue, $sightseer-red);
+	}
+	&.ritandeclan {
+		@include webProjectHeaderStyles($ritandeclan-grey, $ritandeclan-blue, $ritandeclan-pink);
+	}
+	&.e-blast-builder {
+		@include webProjectHeaderStyles($sva-today-grey, $sva-today-blue, $sva-today-red);
 	}
 
 }
