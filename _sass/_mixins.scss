@@ -609,30 +609,64 @@
     // display: block;
     // opacity: 100%;
     // background-color: transparent;
-
+    //border-radius: 0 40% 30% 0 / 94% 30% 70% 40%;
+    //transform: scaleX(0);
+    //width: 100%;
+    //transform-origin: left center;
+    @include transform(skewX(15deg) translate(-200vw, 0));
+    opacity: 1;
+    //height: 200%;
   }
-
-  10% {
+  15% {
     // box-shadow: 0 0 0 0 transparent, 0 0 0 0 transparent;
-    height: 1px;
-    width: 1px;
-    transform: scaleX(0);
-    
+    //border-radius: 40% 20% 60% 90% / 60% 10% 90% 20%;
+    //border-radius: 0 20% 45% 0 / 94% 57% 87% 46%;
+    //width: 25%;
   }
-
-  80% {
+  25% {
+    // box-shadow: 0 0 0 0 transparent, 0 0 0 0 transparent;
+    //border-radius: 40% 20% 60% 90% / 60% 10% 90% 20%;
+    //border-radius: 0 142% 45% 0 / 94% 57% 87% 46%;
+    //width: 25%;
+  }
+  50% {
     // background-color: black;
-
+    //width
+    //border-radius: 0 50% 45% 0 / 60% 57% 50% 46%;
+    //transform: scaleX(50);
+    //@include transform(skewX(15deg) scaleX(0));
   }
-  100% {
+  65% {
+    // background-color: black;
+    //width
+    //border-radius: 0 50% 150% 0 / 94% 57% 25% 46%;
+  }
+  80% {
+    //@include transform(none);
+    @include transform(skewX(15deg) translate(-75vw, 0));
+    // background-color: black;
+    //width
+    //border-radius: 0 150% 45% 0 / 94% 57% 150% 46%;
+  }
+  90% {
     // opacity: 100%;
-    display: block;
+    //display: block;
     // border-radius: 0 0 0 0;
     // background-color: black;
     // box-shadow: 0 0 0 300vw black, 0 0 0 300vh black;
     // height: 300vh;
-    // width: 300vw;
-    transform: scale(30000);
+    //width: 300%;
+    @include transform(skewX(0) translate(0, 0));
+    //@include transform(none);
+    //@include transform(skewX(15deg) translate(0, 0));
+    //transform: scaleX(100);
+    //border-radius: 40% 60%;
+    //border-radius: 40% 60% 60% 40% / 60% 30% 70% 40%;
+
+  }
+  100% {
+    opacity: 0;
+    display: none;
   }
 }
 
@@ -971,7 +1005,8 @@
 }
 
 @mixin pageTransitionAnimateIn() {
-  @include prefix-animation(pageTransitionAnimateIn 1.5s ease-in-out forwards);
+  //@include prefix-animation(pageTransitionAnimateIn 1.75s cubic-bezier(.78,.25,.32,.98) forwards);
+  @include prefix-animation(pageTransitionAnimateIn 0.4s cubic-bezier(.48,.21,.06,1) forwards);
 }
 
 @mixin pageTransitionAnimateOut() {

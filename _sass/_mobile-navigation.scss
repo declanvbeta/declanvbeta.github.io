@@ -43,7 +43,7 @@
 						position: relative;
 						height: 100%;
 						// padding: 5px 12px;
-						padding: 6px 14px 12px 5px;
+						padding: 6px 0 12px 5px;
 						border-radius: 50% 50% 50% 50%;
 						box-shadow: 0 0 0 0 transparent, 0 0 0 0 transparent;
 						background-color: transparent;
@@ -132,7 +132,7 @@
 							display: inline-block;
 
 							@include openMobileNav();
-							padding: 6px 46px 0 0;
+							padding: 6px 30px 0 0;
 
 							.hamburger {
 								background-color: white;
@@ -331,6 +331,40 @@
 		.site-header.open-mobile {
 			.wrapper {
 				.site-nav {
+					.site-title-wrapper {
+						.site-title {
+							color: $color1;
+							&:hover,
+							&:active {
+								@include expand-underline($color2, 3px);
+							}
+						}
+						.menu-wrapper {
+							#menu {
+								.hamburger {
+									background: $color1;
+
+									&:before,
+									&:after {
+										background: $color1;
+									}
+								}
+
+								&:hover,
+								&:active {
+									.hamburger {
+										background: $color2;
+
+										&:before,
+										&:after {
+											background: $color2;
+										}
+									}
+								}
+							}
+
+						}
+					}
 					.trigger.box {
 						.subpages.open {
 							border: 1.5px solid $color1;

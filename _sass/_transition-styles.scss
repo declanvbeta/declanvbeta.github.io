@@ -2,31 +2,93 @@
   position: absolute;
   display: none;
   top: 0;
+  //left: -120%;
+  height: 150%;
+  width: 200vw;
+  z-index: 9999;
+  background-color: $site-orange;
+  overflow: visible;
+  @include transform(skewX(15deg) translate(-250vw, 0));
+  opacity: 1;
   left: 0;
-  height: 300%;
-  width: 0px;
-  z-index: 10000;
-  // background-color: black;
-  border-radius: 0 100% 100% 0;
 
   &.transition-in {
-  	display: block;
-  	// border-radius: 100%;
+    //display: block;
 
-  	border-radius: 0 100% 100% 0;
+    //border-radius: 0 142% 45% 0 / 94% 57% 87% 46%;
+    //width: 25%;
+    // border-radius: 100%;
+
+    //border-radius: 0 100% 100% 0;
+    //border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
 
 
-  	// background-color: black;
-  	// opacity: 100%;
-  	// box-shadow: 0 0 0 150vw black, 0 0 0 150vh black;
-  	@include pageTransitionAnimateIn();
+    // background-color: black;
+    // opacity: 100%;
+    // box-shadow: 0 0 0 150vw black, 0 0 0 150vh black;
+    display: block;
+    @include pageTransitionAnimateIn();
+
   }
 
-  &.transition-out {
-  	// display: none;
-  	// background-color: transparent;
-  	// opacity: 0;
-  	// box-shadow: 0 0 0 0 transparent, 0 0 0 0 transparent;
-  	@include pageTransitionAnimateOut();
+  #background-shape-1,
+  #background-shape-2 {
+    content: '';
+    position: absolute;
+    display: inline-block;
+    opacity: 1;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    ////width: 50vw;
+    //z-index: 9999;
+    //background-color: black;
+    //-webkit-filter: invert(.8);
+    //filter: drop-shadow(20px 0 10px black);
+    z-index: 2;
+    background-color: inherit;
+    opacity: 1;
+    //&:before {
+    //  //left: 0%;
+    //  width: 105%;
+    //  @include transform(translate(5%, 0));
+    //}
+    //@include transform(translate(10%, 0));
+
   }
+  #background-shape-2 {
+    z-index: 1;
+    background-color: inherit;
+    opacity: 0.5;
+    @include transform(translate(10vw, 0));
+
+    &:after {
+      //left: 10%;
+      content: '';
+      position: absolute;
+      display: inline-block;
+      top: 0;
+      left: 0;
+      height: 100%;
+      opacity: 0.25;
+      background-color: inherit;
+      width: 100%;
+      z-index: -1;
+      @include transform(translate(11vw, 0));
+    }
+  }
+
+  //border-radius: 0 100% 100% 0;
+  //border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  //@include transform(skewY(30deg));
+
+
+  //&.transition-out {
+  //	// display: none;
+  //	// background-color: transparent;
+  //	// opacity: 0;
+  //	// box-shadow: 0 0 0 0 transparent, 0 0 0 0 transparent;
+  //	@include pageTransitionAnimateOut();
+  //}
 }

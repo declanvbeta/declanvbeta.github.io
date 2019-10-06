@@ -638,9 +638,27 @@
 
 	// Responsive Styles
 
-	@media(min-width: 1200px) {
+	@media(min-width: 2000px) {
 		.page-nav {
 			opacity: 0.9;
+		}
+
+		.content-container {
+			.intro-text-container {
+				.description-container {
+					.tech-wrapper {
+						.tech-list {
+							.tech-item {
+								span {
+									&:after {
+										display: none;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
 		}
 	}
 

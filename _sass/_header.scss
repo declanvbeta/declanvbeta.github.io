@@ -122,6 +122,7 @@
 			@include nav-button($site-blue, $site-pink);
 		}
 
+
 		.site-title-wrapper {
 			align-self: flex-start;
 		}
@@ -146,6 +147,7 @@
 		.page-link {
 			@include nav-button($site-blue, $site-pink);
 		}
+
 	}
 }
 
@@ -245,140 +247,159 @@
 
 
 @mixin webProjectHeaderStyles($color1, $color2, $color3) {
+
 	.site-title,
 	.page-link {
 		// @include web-project($sightseer-red, $sightseer-blue, $sightseer-grey);
 		@include nav-button($color1, $color2);
 	}
 
-	.site-nav {
-		li:hover {
-			.subpages {
-				background-color: $color3;
-				border: 1.5px solid $color2;
-				border-top: none;
-				.page-link {
-					@include nav-button($color1, $color2);
-				}
-			}
-		}
-		.site-title-wrapper {
-			@include hamburger($color3, $color2);
-		}
-	}
-}
-
-@mixin pageHeaderStyles($color1, $color2) {
-	.site-title,
-	.page-link {
-		// @include web-project($sightseer-red, $sightseer-blue, $sightseer-grey);
-		@include nav-button($color1, $color2);
+	.site-title {
+		margin-left: 0;
 	}
 
 	.site-nav {
-		li:hover {
-			.subpages {
-				//background-color: $color3;
-				border: 1.5px solid $color2;
-				border-top: none;
-				.page-link {
-					@include nav-button($color1, $color2);
+		.trigger.box {
+			li:hover {
+				.subpages {
+					background-color: $color3;
+					border: 1.5px solid $color2;
+					border-top: none;
+
+					.page-link {
+						@include nav-button($color1, $color2);
+					}
 				}
 			}
 		}
+
 		.site-title-wrapper {
 			@include hamburger($color1, $color2);
 		}
 	}
+
 }
 
-.about {
+@mixin pageHeaderStyles($color1, $color2) {
 	.site-header {
-		.site-nav {
-			.site-title-wrapper {
-				@include hamburger($about-pink, $about-dark-blue);	
-			}	
-		}
-
-
 		.site-title,
 		.page-link {
-			@include nav-button($about-pink, $about-dark-blue);
+			// @include web-project($sightseer-red, $sightseer-blue, $sightseer-grey);
+			@include nav-button($color1, $color2);
 		}
 
+		.site-nav {
+			li:hover {
+				.subpages {
+					//background-color: $color3;
+					border: 1.5px solid $color2;
+					border-top: none;
+					.page-link {
+						@include nav-button($color1, $color2);
+					}
+				}
+			}
+			.site-title-wrapper {
+				@include hamburger($color1, $color2);
+			}
+		}
 	}
 }
 
 // Page-specific header styles:
+.about {
+	@include pageHeaderStyles($about-pink, $about-dark-blue);
+}
+
 .art {
-	.site-header {
-
-		// background-image: linear-gradient(white, transparent);
-		.site-nav {
-			li:hover {
-				.subpages {
-					border: 1.5px solid $site-blue;
-					border-top: none;
-				}
-			}
-			.site-title-wrapper {
-				@include hamburger($site-pink, $site-blue);
-			}
-		}
-
-
-		.site-title,
-		.page-link {
-			@include nav-button($site-pink, $site-blue);
-		}
-	}
+	@include pageHeaderStyles($site-pink, $site-blue);
 }
 
 .photo {
-	.site-header {
-
-		// background-image: linear-gradient(white, transparent);
-		.site-nav {
-			li:hover {
-				.subpages {
-					border: 1.5px solid $site-blue;
-					border-top: none;
-				}
-			}
-			.site-title-wrapper {
-				@include hamburger($site-purple, $site-yellow);
-			}
-		}
-
-
-		.site-title,
-		.page-link {
-			@include nav-button($site-purple, $site-yellow);
-		}
-	}
+	@include pageHeaderStyles($site-purple, $site-yellow);
 }
 
 .web {
-
 	@include pageHeaderStyles($site-blue, $site-orange);
 
-	&.sva {
-		@include webProjectHeaderStyles($sva-today-grey, $sva-blue, $sva-red);
-	}
-	&.sva-redesign {
-		@include webProjectHeaderStyles($sva-redesign-grey, $sva-redesign-blue, $sva-redesign-red);
-	}
-	&.relay {
-		@include webProjectHeaderStyles($relay-grey, $relay-blue, $relay-red);
-	}
-	&.sightseer {
-		@include webProjectHeaderStyles($sightseer-grey, $sightseer-blue, $sightseer-red);
-	}
-	&.ritandeclan {
-		@include webProjectHeaderStyles($ritandeclan-grey, $ritandeclan-blue, $ritandeclan-pink);
-	}
-	&.e-blast-builder {
-		@include webProjectHeaderStyles($sva-today-grey, $sva-today-blue, $sva-today-red);
+	.site-header {
+		@media (min-width: 600px) {
+
+			&.sva {
+				@include webProjectHeaderStyles($sva-today-grey, $sva-blue, $sva-red);
+				//@include pageHeaderStyles($sva-today-grey, $sva-blue);
+			}
+			&.sva-redesign {
+				@include webProjectHeaderStyles($sva-redesign-grey, $sva-redesign-blue, $sva-redesign-red);
+				//@include pageHeaderStyles($sva-redesign-grey, $sva-redesign-blue);
+			}
+			&.relay {
+				@include webProjectHeaderStyles($relay-grey, $relay-blue, $relay-red);
+				//@include pageHeaderStyles($relay-grey, $relay-blue);
+			}
+			&.sightseer {
+				@include webProjectHeaderStyles($sightseer-grey, $sightseer-blue, $sightseer-red);
+				//@include pageHeaderStyles($sightseer-grey, $sightseer-blue);
+			}
+			&.ritandeclan {
+				@include webProjectHeaderStyles($ritandeclan-grey, $ritandeclan-blue, $ritandeclan-pink);
+				//@include pageHeaderStyles($ritandeclan-grey, $ritandeclan-blue);
+			}
+			&.e-blast-builder {
+				@include webProjectHeaderStyles($sva-today-grey, $sva-today-blue, $sva-today-red);
+				//@include pageHeaderStyles($sva-today-grey, $sva-today-blue);
+			}
+		}
 	}
 
+}
+
+
+
+.site-header {
+
+	.site-nav {
+		.site-title-wrapper {
+			.site-title {
+				padding-left: 0;
+				margin-left: 0;
+			}
+		}
+
+		@media (min-width: 600px) {
+
+			.trigger.box {
+				li {
+					&:first-of-type {
+						.page-link {
+							padding-left: 0;
+							margin-left: 0;
+						}
+					}
+
+					&:last-of-type {
+						.page-link {
+							padding-right: 0;
+							margin-right: 0;
+						}
+					}
+					.subpages {
+						&:first-of-type {
+							.page-link {
+								padding-left: 5px;
+								margin-left: 5px;
+							}
+						}
+
+						&:last-of-type {
+							.page-link {
+								padding-right: 5px;
+								margin-right: 5px;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 }

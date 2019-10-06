@@ -1,3 +1,30 @@
+
+// Polyfill for requestAnimationFrame for browsers that don't support it
+(function() {
+	var lastTime = 0;
+	var vendors = ['webkit', 'moz'];
+	for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
+		window.requestAnimationFrame = window[vendors[x]+'RequestAnimationFrame'];
+		window.cancelAnimationFrame =
+			window[vendors[x]+'CancelAnimationFrame'] || window[vendors[x]+'CancelRequestAnimationFrame'];
+	}
+
+	if (!window.requestAnimationFrame)
+		window.requestAnimationFrame = function(callback, element) {
+			var currTime = new Date().getTime();
+			var timeToCall = Math.max(0, 16 - (currTime - lastTime));
+			var id = window.setTimeout(function() { callback(currTime + timeToCall); },
+				timeToCall);
+			lastTime = currTime + timeToCall;
+			return id;
+		};
+
+	if (!window.cancelAnimationFrame)
+		window.cancelAnimationFrame = function(id) {
+			clearTimeout(id);
+		};
+}());
+
 $( document ).ready(function() {
 	  // Barba.Pjax.Dom.containerClass = 'body';
 
@@ -535,7 +562,7 @@ $( document ).ready(function() {
 	  transitionContainer.addClass('transition-in');
 	  transitionContainer.css('background-color', '#' + currentTransitionColor);
 
-	  return $(this.oldContainer).animate({ opacity: 0 }, 800, function() {}).promise().then(
+	  return $(this.oldContainer).animate({ opacity: 0 }, 200, function() {}).promise().then(
 	  	function() {
 			removePreviousBodyClass()
 		}
@@ -577,7 +604,7 @@ $( document ).ready(function() {
 	  });
 	  // transitionContainer.addClass('.transition-in');
 
-	  $el.animate({ opacity: 1 }, 800, function() {
+	  $el.animate({ opacity: 1 }, 400, function() {
 		/**
 		 * Do not forget to call .done() as soon your transition is finished!
 		 * .done() will automatically remove from the DOM the old Container

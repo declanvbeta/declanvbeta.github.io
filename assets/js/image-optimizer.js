@@ -42,6 +42,7 @@ var imageOptimizer = function(galleryContainer, masonryInstance) {
         // load all the images now:
         lazyImages.forEach(function(lazyImage) {
             lazyImage.src = lazyImage.dataset.src;
+            $lazyImage.removeClass('blur');
         });
     }
 }

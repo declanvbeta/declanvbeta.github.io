@@ -56,6 +56,12 @@ body {
 		}
 	}
 
+	::selection {
+		background: $site-pink; /* WebKit/Blink Browsers */
+	}
+	::-moz-selection {
+		background: $site-pink; /* Gecko Browsers */
+	}
 
 }
 
