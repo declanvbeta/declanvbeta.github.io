@@ -32,7 +32,7 @@
 
 				.menu-wrapper {
 					@include flex(0 0 auto);
-					@include align-self-end();
+					@include align-self-start();
 					justify-self: end;
 					position: relative;
 					@include display-flex();
@@ -408,6 +408,6 @@
 		@include mobileSubnavColor($site-blue, $site-pink);
 	}
 	.photo {
-		@include mobileSubnavColor($site-purple, $site-yellow);
+		@include mobileSubnavColor($site-light-blue, $site-yellow);
 	}
 }

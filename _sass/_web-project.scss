@@ -587,7 +587,7 @@
 				@include flex(1 1 auto);
 				margin: 0 auto;
 				width: 75%;
-				padding: 60px 20px 30px 60px;
+				padding: 60px 10px 30px 54px;
 
 			}
 		}
@@ -689,6 +689,7 @@
 					width: 100%;
 
 					.intro-text-description {
+						padding-right: 0;
 						.intro-text {
 							font-size: 16px;
 						}
@@ -801,7 +802,7 @@
 
 		.content-container,
 		.objective-container {
-			padding: 40px 30px 30px 30px;
+			padding: 40px 18px 30px 18px;
 		}
 		.objective-container {
 			width: 100%;
