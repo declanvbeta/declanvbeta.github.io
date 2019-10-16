@@ -4,7 +4,8 @@ var imageOptimizer = function(galleryContainer, masonryInstance) {
     }
     var container = document.querySelector(galleryContainer);
     var lazyImages = [].slice.call(container.querySelectorAll('img.lazy'));
-    if ('IntersectionObserver' in window) {
+
+    var observeImages = function() {
         config = {
             // If the image gets within 250px of the browser's viewport,
             // start the download:
@@ -22,6 +23,7 @@ var imageOptimizer = function(galleryContainer, masonryInstance) {
                             // $lazyImage.parent().addClass('unblur');
                             $lazyImage.removeClass('blur');
                             lazyImage.classList.add('unblur');
+                            console.log("here is the image: ", lazyImage);
                             if (masonryInstance !== null && typeof masonryInstance !== undefined) {
                                 $(galleryContainer).masonry('layout');
                             }
@@ -36,14 +38,38 @@ var imageOptimizer = function(galleryContainer, masonryInstance) {
         lazyImages.forEach(function(lazyImage) {
             lazyImageObserver.observe(lazyImage);
         });
-
+    }
+    // if ('IntersectionObserver' in window) {
+    if (true == false) {
+        observeImages();
     } else {
+        function loadScript(url, callback)
+        {
+            // Adding the script tag to the head as suggested before
+            var head = document.head;
+            var script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.src = url;
+
+            // Then bind the event to the callback function.
+            // There are several events for cross browser compatibility.
+            script.onreadystatechange = callback;
+            script.onload = callback;
+
+            // Fire the loading
+            head.appendChild(script);
+        }
+
+        // loadScript("https://polyfill.io/v3/polyfill.min.js?features=IntersectionObserver%2CIntersectionObserverEntry", observeImages);
+        loadScript("/assets/compiled/js/intersectionObserverPolyfill.js", observeImages);
+
         // For browsers that don't support IntersectionObserver yet,
         // load all the images now:
-        lazyImages.forEach(function(lazyImage) {
-            lazyImage.src = lazyImage.dataset.src;
-            $lazyImage.removeClass('blur');
-        });
+        // lazyImages.forEach(function(lazyImage) {
+        //     lazyImage.src = lazyImage.dataset.src;
+        //     lazyImage.classList.remove('blur');
+        //     lazyImage.classList.add('unblur');
+        // });
     }
 }
 

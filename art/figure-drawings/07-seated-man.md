@@ -1,6 +1,6 @@
 ---
 layout: illustration
-title: Reclining Figure
+title: Seated Figure
 type: art, figure-drawing
 description: Figure Drawing of a seated man from January 14th, 2017.
 alt: Drawing of a nude seated man.

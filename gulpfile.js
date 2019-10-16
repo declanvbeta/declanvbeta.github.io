@@ -52,6 +52,9 @@ var files = {
 				js + 'scroll-into-view.js',
 				js + 'image-optimizer.js',
 				js + 'page-transitions.js'
+			],
+			extra: [
+				js + 'intersectionObserverPolyfill.js'
 			]
 		}
 	},
@@ -102,13 +105,23 @@ gulp.task('css', () => {
 });
 
 
-// Uglify the SVA JS files
+// Uglify the JS files
 gulp.task('js', function () {
   // return console.log('js dest: ', files.dest.js);
   return gulp.src(files.source.js.all)
       // .pipe(sourcemaps.init())
       .pipe(uglify())
       .pipe(concat('site.min.js'))
+      // .pipe(cache('js'))
+      .pipe(gulp.dest(compiledJs));
+});
+
+// Add un-concatenated js files
+gulp.task('extraJs', function () {
+  // return console.log('js dest: ', files.dest.js);
+  return gulp.src(files.source.js.extra)
+      // .pipe(sourcemaps.init())
+      .pipe(uglify())
       // .pipe(cache('js'))
       .pipe(gulp.dest(compiledJs));
 });
@@ -124,4 +137,4 @@ gulp.task('jsSourcemap', function () {
       .pipe(gulp.dest(files.dest.js));
 });
 
-gulp.task('default', ['js', 'jekyll', 'serve', 'watch']);
+gulp.task('default', ['js', 'extraJs', 'jekyll', 'serve', 'watch']);
