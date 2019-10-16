@@ -23,7 +23,6 @@ var imageOptimizer = function(galleryContainer, masonryInstance) {
                             // $lazyImage.parent().addClass('unblur');
                             $lazyImage.removeClass('blur');
                             lazyImage.classList.add('unblur');
-                            console.log("here is the image: ", lazyImage);
                             if (masonryInstance !== null && typeof masonryInstance !== undefined) {
                                 $(galleryContainer).masonry('layout');
                             }
@@ -39,12 +38,10 @@ var imageOptimizer = function(galleryContainer, masonryInstance) {
             lazyImageObserver.observe(lazyImage);
         });
     }
-    // if ('IntersectionObserver' in window) {
-    if (true == false) {
+    if ('IntersectionObserver' in window) {
         observeImages();
     } else {
-        function loadScript(url, callback)
-        {
+        function loadScript(url, callback) {
             // Adding the script tag to the head as suggested before
             var head = document.head;
             var script = document.createElement('script');
@@ -59,10 +56,11 @@ var imageOptimizer = function(galleryContainer, masonryInstance) {
             // Fire the loading
             head.appendChild(script);
         }
-
+        // If I wanted to load from the polyfill server instead
         // loadScript("https://polyfill.io/v3/polyfill.min.js?features=IntersectionObserver%2CIntersectionObserverEntry", observeImages);
         loadScript("/assets/compiled/js/intersectionObserverPolyfill.js", observeImages);
 
+        // Old approach, which forced a download of all images up-front
         // For browsers that don't support IntersectionObserver yet,
         // load all the images now:
         // lazyImages.forEach(function(lazyImage) {
