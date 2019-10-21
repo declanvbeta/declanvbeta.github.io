@@ -508,6 +508,19 @@ body.about {
 			}
 		}
 	}
+	@media (min-height: 1000px) {
+		.page-content {
+			.about-container {
+				.collage-container {
+					@include transform(scale(1.05));
+					z-index: 2;
+					.collage-grid {
+						padding-top: 25%;
+					}
+				}
+			}
+		}
+	}
 	@media (max-width: 900px) {
 		.page-content {
 			.about-container {

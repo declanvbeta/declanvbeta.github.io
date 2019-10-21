@@ -20,11 +20,10 @@ var imageOptimizer = function(galleryContainer, masonryInstance) {
                         downloadingImage.onload = function () {
                             lazyImage.src = this.src;
                             $lazyImage = $(lazyImage);
-                            // $lazyImage.parent().addClass('unblur');
                             $lazyImage.removeClass('blur');
                             lazyImage.classList.add('unblur');
                             if (masonryInstance !== null && typeof masonryInstance !== undefined) {
-                                $(galleryContainer).masonry('layout');
+                                $(container).masonry('layout');
                             }
                         }
                         downloadingImage.src = lazyImage.dataset.src;

@@ -185,5 +185,12 @@
 			}
 		}
 
+		@media (max-width: 755px) {
+			a {
+				padding-left: 0;
+				padding-right: 0;
+			}
+		}
+
 	}
 }

@@ -20,13 +20,15 @@ custom_js:
 
 	{% for web in site.webs %}
 
-		{% assign img_path = "/assets/images/web/" | append: web.image-cover %}
+<!--		{% assign img_path = "/assets/images/web/" | append: web.image-cover %}-->
 
 		{% capture thecycle %}{% cycle 'even', '' %}{% endcapture %}
 
+		{% assign type = web.title | replace: " ", "-" | downcase %}
+
 		<a href="{{ web.url }}.html" data-seen-yet="false" class="web-project {{ web.title | replace: ' ','-' | downcase }} {% if forloop.first == true %}first{% else %}show-on-scroll{% endif %} {{ thecycle }}" data-hex="{{ web.hex }}">
 			<div class="img-container">
-				<img class="image" src="{{ img_path | absolute_url}}" alt="{{web.alt}}">
+				{% include web-lazy-image.html type=type image=web.image-cover %}
 				<!-- ![My helpful screenshot]({{ "/assets/screenshot.jpg" | absolute_url }}) -->
 			</div>
 			<div class="description-container">

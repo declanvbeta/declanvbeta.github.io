@@ -26,8 +26,10 @@
 }());
 
 $( document ).ready(function() {
+  // Adding a touchstart listener on the document in order to emulate hover states on touch devices
+  // document.addEventListener("touchstart", function(){}, true);
 	  // Barba.Pjax.Dom.containerClass = 'body';
-
+  $('body').on('touchstart', function() {});
   var closeSubPageGroups = function() {
 
 	  var navWChildren = $('.subpages').prev('.page-link');

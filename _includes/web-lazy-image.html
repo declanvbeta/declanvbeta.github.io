@@ -1,0 +1,8 @@
+{% assign section = "web/" %}
+{% assign type = include.type %}
+{% assign art = include.image %}
+
+{% assign small_img_path = "/assets/images/" | append: section | append: type | append: "/small/" | append: art %}
+{% assign tiny_img_path = "/assets/images/" | append: section | append: type | append: "/tiny/" | append: art %}
+
+<img class="image lazy blur" src="{{tiny_img_path | absolute_url}}" alt="{{art.alt}}" data-src="{{small_img_path | absolute_url}}">

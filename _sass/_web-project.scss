@@ -399,7 +399,7 @@
 								font-size: 16px;
 								@include display-flex();
 								@include flex-direction-row();
-								@include flex(1 0 auto);
+								@include flex(0 1 auto);
 								span {
 									@include flex(1 0 auto);
 									&:after {
@@ -407,7 +407,7 @@
 										position: relative;
 										color: black;
 										display: inline-block;
-										margin-left: -7px;
+										margin-left: -5px;
 										margin-right: 5px;
 									}
 								}
@@ -710,11 +710,10 @@
 							@include display-flex();
 							@include flex-direction-row();
 							@include justify-content-space-between();
-
 							.tech-item {
 								padding: 0;
-								flex: 1 0 auto;
 								font-size: 16px;
+
 								span {
 									&:after {
 										display: none;
@@ -777,9 +776,12 @@
 
 						.tech-list {
 							//display: inline-block;
+							@include justify-content-flex-start();
 
 							.tech-item {
 								font-size: 18px;
+								@include flex(0 1 auto);
+
 								span {
 									&:after {
 										display: inline-block;

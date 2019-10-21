@@ -6,6 +6,7 @@ hex: 3EAFC4
 {% assign img_path = "/assets/images/web/" %}
 {% assign nextPage = page.next %}
 {% assign prevPage = page.previous %}
+{% assign type = page.title | replace: " ", "-" | downcase %}
 
 <div class="web-project-container {{ page.title | replace: ' ','-' | downcase }}">
 	<div class="background-color one"></div>
@@ -46,7 +47,7 @@ hex: 3EAFC4
 		</div>
 
 		<div class="intro-image">
-			<img src="{{img_path | append: page.image1}}" />
+			{% include web-lazy-image.html type=type image=page.image1 %}
 		</div>
 
 		<div class="intro-text-container">
@@ -120,7 +121,7 @@ hex: 3EAFC4
 			</div>
 		{% elsif page.image2 %}
 			<div class="intro-image">
-				<img src="{{img_path | append: page.image2}}" />
+				{% include web-lazy-image.html type=type image=page.image2 %}
 			</div>
 		{% endif %}
 		{% if page.image3 == nil %}
@@ -141,7 +142,7 @@ hex: 3EAFC4
 	{% if page.image3 and page.video2 == nil %}
 		<div class="content-container outro show-on-scroll">
 			<div class="intro-image">
-				<img src="{{img_path | append: page.image3}}" />
+				{% include web-lazy-image.html type=type image=page.image3 %}
 			</div>
 			<div class="isolated-text">
 				<p class='text'>
@@ -174,7 +175,7 @@ hex: 3EAFC4
 	{% if page.image4 and page.description4 %}
 		<div class="content-container outro show-on-scroll">
 			<div class="intro-image">
-				<img src="{{img_path | append: page.image4}}" />
+				{% include web-lazy-image.html type=type image=page.image4 %}
 			</div>
 			{% if page.description4 %}
 				<div class="full-width-text-container">
@@ -208,7 +209,7 @@ hex: 3EAFC4
 	{% if page.image5 %}
 	<div class="content-container outro show-on-scroll">
 		<div class="intro-image">
-			<img src="{{img_path | append: page.image5}}" />
+			{% include web-lazy-image.html type=type image=page.image5 %}
 		</div>
 		{% if page.description5 %}
 		<div class="isolated-text">
