@@ -11,16 +11,16 @@
             {% if depth < 3 %}
                 {% assign i = i | plus:1 %}
                 {% if lastDepth == 0 %}
-                    <li onclick>
+                    <li onclick="void(0)">
                         <a class="page-link link-{{i}} {% if page.url contains entry.url %} active{% endif %}" href="{{ site.baseurl }}{{ entry.url }}" {% if entry.hex %}data-hex="{{entry.hex}}"{% endif %}>{{ entry.title | downcase }}</a>
                 {% else if lastDepth > depth %}
                         </ul> 
                     </li>
-                    <li onclick>
+                    <li onclick="void(0)">
                         <a class="page-link link-{{i}} {% if page.url contains entry.url %} active{% endif %}" href="{{ site.baseurl }}{{ entry.url }}" {% if entry.hex %}data-hex="{{entry.hex}}"{% endif %}>{{ entry.title | downcase }}</a>
                 {% else if lastDepth == depth %}
                     </li>
-                    <li onclick>
+                    <li onclick="void(0)">
                         <a class="page-link link-{{i}} {% if page.url contains entry.url %} active{% endif %}" href="{{ site.baseurl }}{{ entry.url }}" {% if entry.hex %}data-hex="{{entry.hex}}"{% endif %}>{{ entry.title | downcase }}</a>
                 {% endif %}         
                 {% include navigation.html context=entry.url i=i loopNumber=loopNumber subnav=true lastDepth=lastDepth %}
